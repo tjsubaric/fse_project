@@ -45,7 +45,7 @@ protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
         .antMatchers("/admin/**").hasRole("ADMIN")
         .antMatchers("/user/**").hasRole("USER")
-        .antMatchers("/teacher/**").hasRole("TEACHER")
+        .antMatchers("/employee/**").hasRole("EMPLOYEE")
         .antMatchers("/**").permitAll()
         .and()
         .formLogin()
@@ -57,8 +57,8 @@ protected void configure(HttpSecurity http) throws Exception {
                     response.sendRedirect("/admin/");
                 } else if (authority.getAuthority().equals("ROLE_USER")) {
                     response.sendRedirect("/user/");
-                } else if (authority.getAuthority().equals("ROLE_TEACHER")) {
-                    response.sendRedirect("/teacher/");
+                } else if (authority.getAuthority().equals("ROLE_EMPLOYEE")) {
+                    response.sendRedirect("/employee/");
                 }
             }
         })

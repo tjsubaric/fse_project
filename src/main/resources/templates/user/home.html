@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="patient_dash::layout(~{::section})">
 <head>
 <meta charset="ISO-8859-1">
-<title>User Home</title>
+<title>Patient Home</title>
+
 </head>
 <body>
-	<h1>User After Login: Home Page</h1>
-	<a href="/logout">Logout</a>
-	<h1>Name : [[${user.fullName}]]</h1>
-	<h1>Email : [[${user.email}]]</h1>
+	<section>
+		<h1>Patient Home Page</h1>
+		<h1>Name : [[${user.fullName}]]</h1>
+		<h1>Email : [[${user.email}]]</h1>
+	</section>
 </body>
 </html>

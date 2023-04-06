@@ -45,6 +45,11 @@ public class AdminRestController {
         return userService.getAllUsers();
     }
 
+    @GetMapping("/api/admins/new_admin")
+    public Admin showNewAdminForm() {
+        return new Admin();
+    }
+
     @PostMapping("/saveAdmin")
     public void saveAdmin(@RequestBody Admin admin) {
         adminService.saveAdmin(admin);

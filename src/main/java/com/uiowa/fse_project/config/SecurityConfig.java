@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -41,31 +42,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
-
-    http.authorizeRequests()
-        .antMatchers("/api/admins/**").hasRole("ADMIN")
-        .antMatchers("/admin/**").hasRole("ADMIN")
-        .antMatchers("/user/**").hasRole("USER")
-        .antMatchers("/employee/**").hasRole("EMPLOYEE")
-        .antMatchers("/**").permitAll()
-        .and()
-        .formLogin()
-        .loginPage("/signin")
-        .loginProcessingUrl("/login")
-        .successHandler((request, response, authentication) -> {
-            for (GrantedAuthority authority : authentication.getAuthorities()) {
-                if (authority.getAuthority().equals("ROLE_ADMIN")) {
-                    response.sendRedirect("/admin/");
-                } else if (authority.getAuthority().equals("ROLE_USER")) {
-                    response.sendRedirect("/user/");
-                } else if (authority.getAuthority().equals("ROLE_EMPLOYEE")) {
-                    response.sendRedirect("/employee/");
-                }
-            }
-        })
-        .and()
-        .csrf()
-        .disable();
+        http
+            .authorizeHttpRequests(authorize -> authorize
+                .antMatchers("/api/admins/**").hasRole("ADMIN")
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/user/**").hasRole("USER")
+                .antMatchers("/employee/**").hasRole("EMPLOYEE")
+                .antMatchers("/**").permitAll()
+            )
+            .formLogin(formLogin -> formLogin
+                .loginPage("/signin")
+                .loginProcessingUrl("/login")
+                .successHandler((request, response, authentication) -> {
+                    for (GrantedAuthority authority : authentication.getAuthorities()) {
+                        if (authority.getAuthority().equals("ROLE_ADMIN")) {
+                            response.sendRedirect("/admin/");
+                        } else if (authority.getAuthority().equals("ROLE_USER")) {
+                            response.sendRedirect("/user/");
+                        } else if (authority.getAuthority().equals("ROLE_EMPLOYEE")) {
+                            response.sendRedirect("/employee/");
+                        }
+                    }
+                })
+            )
+            .csrf(csrf -> csrf
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .disable()
+            );
     }
 
 }

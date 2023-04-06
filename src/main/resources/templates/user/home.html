@@ -1,17 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	th:replace="patient_dash::layout(~{::section})">
-<head>
-<meta charset="ISO-8859-1">
-<title>Patient Home</title>
-
+<head th:include="my_head::head">
 </head>
 <body>
 	<section>
-		<h1>Patient Home Page</h1>
-		<h1>First Name : [[${user.firstName}]]</h1>
-		<h1>Last Name : [[${user.lastName}]]</h1>
-		<h1>Email : [[${user.email}]]</h1>
+		<div class = "wrapper">
+			<div class = "left">
+				<h3> Patient:</h3>
+				<p> [[${user.firstName}]] [[${user.lastName}]] </p>
+			</div>
+			<div class = "right">
+				<div class = "info">
+					<h3>Information:</h3>
+					<div class = "info_data">
+						<div class = "data">
+							<h5>Email</h5>
+							<p>[[${user.email}]]</p>
+						</div>
+						<div class = "data">
+							<h5>Doctor</h5>
+							<p> empty atm</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</section>
 </body>
 </html>

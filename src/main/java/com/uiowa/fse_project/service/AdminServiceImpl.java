@@ -25,20 +25,20 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void saveAdmin(Admin employee) {
-		this.adminRepository.save(employee);
+	public void saveAdmin(Admin admin) {
+		this.adminRepository.save(admin);
 	}
 
 	@Override
 	public Admin getAdminById(long id) {
 		Optional<Admin> optional = adminRepository.findById(id);
-		Admin employee = null;
+		Admin admin = null;
 		if (optional.isPresent()) {
-			employee = optional.get();
+			admin = optional.get();
 		} else {
-			throw new RuntimeException(" Employee not found for id :: " + id);
+			throw new RuntimeException(" Admin not found for id :: " + id);
 		}
-		return employee;
+		return admin;
 	}
 
 	@Override

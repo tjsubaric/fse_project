@@ -18,6 +18,8 @@ public class Admin {
 	private String username;
 	@Column(name = "email")
 	private String email;
+	@Column(name = "password")
+	private String password;
     @Column(name = "role")
 	private String role;
 
@@ -34,6 +36,7 @@ public class Admin {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -46,5 +49,12 @@ public class Admin {
 	}
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

@@ -15,6 +15,17 @@
           <h1>Schedule an Appointment</h1>
           <form class="mx-auto">
             <div class="text-center mt-5">
+                <label for="doctor-nurse">Find a Doctor/Nurse:</label>
+                <div class="col-sm-2 mx-auto">
+                  <select class="form-control" id="doctor-nurse">
+                    <option value="">-- Select Doctor/Nurse --</option>
+                    <option value="checkup">Dr. John Sins Primary Care</option>
+                    <option value="follow-up">Helen Ratched Nurse </option>
+                    <option value="consultation">Dr. John Fernandez Hand Specialist</option>
+                  </select>
+                </div>
+              </div>
+            <div class="text-center mt-5">
               <label for="appointment-date">Pick a Date:</label>
               <div class="col-sm-2 mx-auto">
                 <div class="input-group date" data-provide="datepicker">

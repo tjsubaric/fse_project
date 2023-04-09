@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uiowa.fse_project.model.Admin;
+import com.uiowa.fse_project.model.Employee;
 import com.uiowa.fse_project.model.UserDtls;
 import com.uiowa.fse_project.service.AdminService;
 import com.uiowa.fse_project.service.UserService;
@@ -48,6 +49,11 @@ public class AdminRestController {
     @GetMapping("/api/admins/new_admin")
     public Admin showNewAdminForm() {
         return new Admin();
+    }
+
+    @GetMapping("/api/admins/new_employee")
+    public Employee showNewEmployeeForm() {
+        return new Employee();
     }
 
     @PostMapping("/saveAdmin")

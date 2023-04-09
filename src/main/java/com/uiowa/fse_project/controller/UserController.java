@@ -33,4 +33,9 @@ public class UserController {
 		return "user/home";
 	}
 
+	@GetMapping("/appointments")
+	public String appointments() {
+		return "user/appointments";
+	}
+
 }

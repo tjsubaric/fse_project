@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uiowa.fse_project.model.UserDtls;
 import com.uiowa.fse_project.service.UserService;
@@ -19,7 +20,7 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String index() {
-		return "index";
+		return "login";
 	}
 
 	@GetMapping("/signin")
@@ -30,6 +31,11 @@ public class HomeController {
 	@GetMapping("/register")
 	public String register() {
 		return "register";
+	}
+
+	@GetMapping("/forgotPassword")
+	public String forgotPassword() {
+		return "forgotPassword";
 	}
 
 	@PostMapping("/createUser")

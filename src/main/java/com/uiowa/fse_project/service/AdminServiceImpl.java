@@ -19,6 +19,7 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private AdminRepository adminRepository;
 
+
 	@Override
 	public List<Admin> getAllAdmins() {
 		return adminRepository.findAll();
@@ -54,4 +55,5 @@ public class AdminServiceImpl implements AdminService {
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
 		return this.adminRepository.findAll(pageable);
 	}
+
 }

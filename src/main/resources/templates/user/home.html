@@ -8,8 +8,26 @@
 </head>
 <body>
 	<section>
-		<div class="text-center mt-5">
-			<h1>Welcome Back [[${user.username}]] !</h1>
+		<div class = "wrapper">
+			<div class = "left">
+				<h3> Patient:</h3>
+				<p> [[${user.username}]]</p>
+			</div>
+			<div class = "right">
+				<div class = "info">
+					<h3>Information:</h3>
+					<div class = "info_data">
+						<div class = "data">
+							<h5>Email</h5>
+							<p>[[${user.email}]]</p>
+						</div>
+						<div class = "data">
+							<h5>Doctor</h5>
+							<p> empty atm</p>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</section>
 </body>

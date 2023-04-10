@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class UserDtls {
+public class Patient {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

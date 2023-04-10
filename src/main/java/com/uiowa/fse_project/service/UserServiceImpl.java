@@ -1,5 +1,7 @@
 package com.uiowa.fse_project.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,12 @@ public class UserServiceImpl implements UserService {
 	public boolean checkEmail(String email) {
 
 		return userRepo.existsByEmail(email);
+	}
+
+	@Override
+	public List<UserDtls> getAllUsers() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getAllUsers'");
 	}
 
 }

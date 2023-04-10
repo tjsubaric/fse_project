@@ -19,7 +19,7 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String index() {
-		return "index";
+		return "login";
 	}
 
 	@GetMapping("/signin")
@@ -30,6 +30,11 @@ public class HomeController {
 	@GetMapping("/register")
 	public String register() {
 		return "register";
+	}
+
+	@GetMapping("/forgotPassword")
+	public String forgotPassword() {
+		return "forgotPassword";
 	}
 
 	@PostMapping("/createUser")

@@ -15,18 +15,15 @@
 		<h2>Save Admin</h2>
 
 		<form action="/saveAdmin" th:object="${admin}"
-			method="POST">
+			method="POST" onsubmit="return validateForm()">
 			<input type="text" th:field="*{username}"
 				placeholder="Admin Username" class="form-control mb-4 col-4">
 				
 				<input type="text" th:field="*{email}"
 				placeholder="Admin Email" class="form-control mb-4 col-4">
 
-				<input type="text" th:field="*{username}"
-				placeholder="Admin Password" class="form-control mb-4 col-4">
-
-				<input type="text" th:field="*{username}"
-				placeholder="Confirm Password" class="form-control mb-4 col-4">
+				<input type="password" id="password" th:field="*{password}" placeholder="Enter Password" class="form-control mb-4 col-4">
+  				<input type="password" id="confirmPassword" th:field="*{password}" placeholder="Confirm Password" class="form-control mb-4 col-4">
 				
 				<button type="submit" class="btn btn-info col-2"> Save Admin</button>
 		</form>

@@ -29,11 +29,6 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-	// @GetMapping("/")
-	// public String home() {
-	// 	return "admin/home";
-	// }
-
 	@GetMapping("/")
 	public String viewHomePage(Model model) {
 		return findPaginated(1, "firstName", "asc", model);		

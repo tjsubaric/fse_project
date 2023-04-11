@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.uiowa.fse_project.model.Admin;
 import com.uiowa.fse_project.model.Employee;
+import com.uiowa.fse_project.service.AdminService;
 import com.uiowa.fse_project.service.EmployeeService;
 
 
@@ -22,6 +23,9 @@ public class AdminController {
 
 	@Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private AdminService adminService;
 
 	@GetMapping("/")
 	public String home() {
@@ -46,36 +50,10 @@ public class AdminController {
         return "admin/employee_board";
     }
 
-    @GetMapping("/employee_board/new_employee")
-    public String showNewEmployeeForm(Model model) {
-        model.addAttribute("employee", new Employee());
-        return "admin/employee_board/new_employee";
-    }
-
-    @PostMapping("/employee_board/employee")
-    public String saveEmployee(@ModelAttribute("employee") Employee employee) {
-        employeeService.saveEmployee(employee);
-        return "redirect:/admin/employee_board";
-    }
-
-    @GetMapping("/employee_board/edit_employee/{id}")
-    public String showEditEmployeeForm(@PathVariable(value = "id") long id, Model model) {
-        Employee employee = employeeService.getEmployeeById(id);
-        model.addAttribute("employee", employee);
-        return "admin/employee_board/edit_employee";
-    }
-
-    @PostMapping("/employee_board/update_employee/{id}")
-    public String updateEmployee(@PathVariable(value = "id") long id, @ModelAttribute("employee") Employee employee) {
-        Employee existingEmployee = employeeService.getEmployeeById(id);
-        existingEmployee.setEmail(employee.getEmail());
-        employeeService.saveEmployee(existingEmployee);
-        return "redirect:/admin/employee_board";
-    }
-
-    @GetMapping("/employee_board/delete_employee/{id}")
-    public String deleteEmployee(@PathVariable(value = "id") long id) {
-        employeeService.deleteEmployeeById(id);
-        return "redirect:/admin/employee_board";
-    }
+    @PostMapping("/saveAdmin")
+	public String saveAdmin(@ModelAttribute("admin") Admin admin) {
+		// save employee to database
+		adminService.saveAdmin(admin);
+		return "redirect:/admin/";
+	}
 }

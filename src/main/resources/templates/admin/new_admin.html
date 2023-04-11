@@ -14,7 +14,7 @@
 		<hr>
 		<h2>Save Admin</h2>
 
-		<form action="/saveAdmin" th:object="${admin}"
+		<form action="#" th:action="@{saveAdmin}" th:object="${admin}"
 			method="POST" onsubmit="return validateForm()">
 			<input type="username" th:field="*{username}"
 				placeholder="Username" class="form-control mb-4 col-4">
@@ -31,7 +31,7 @@
 				<input type="password" id="password" th:field="*{password}" placeholder="Enter Password" class="form-control mb-4 col-4">
   				<input type="password" id="confirmPassword" th:field="*{password}" placeholder="Confirm Password" class="form-control mb-4 col-4">
 				
-				<button type="submit" class="btn btn-info col-2"> Save Admin</button>
+				<button type="submit" id="submitButton" class="btn btn-info col-2"> Save Admin</button>
 		</form>
 		<hr>
 		<a th:href = "@{/admin/}"> Back to Admin List</a>

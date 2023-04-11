@@ -39,12 +39,6 @@ public class AdminController {
     	return "admin/patient_board";
 	}
 
-	@GetMapping("/new_admin")
-	public String showNewAdminForm(Model model) {
-		model.addAttribute("admin", new Admin());
-		return "admin/new_admin";
-	}
-
 	@GetMapping("/employee_board")
     public String showEmployeeBoard(Model model) {
         List<Employee> employees = employeeService.getAllEmployees();
@@ -52,10 +46,34 @@ public class AdminController {
         return "admin/employee_board";
     }
 
+	@GetMapping("/new_admin")
+	public String showNewAdminForm(Model model) {
+		model.addAttribute("admin", new Admin());
+		return "admin/new_admin";
+	}
+
     @PostMapping("/saveAdmin")
 	public String saveAdmin(@ModelAttribute("admin") Admin admin) {
 		// save employee to database
 		adminService.saveAdmin(admin);
+		return "redirect:/admin/";
+	}
+
+	@GetMapping("/showFormForUpdate/{id}")
+	public String showFormForUpdate(@PathVariable ( value = "id") long id, Model model) {
+		
+		// get employee from the service
+		Admin admin = adminService.getAdminById(id);
+		
+		// set employee as a model attribute to pre-populate the form
+		model.addAttribute("admin", admin);
+		return "admin/update_admin";
+	}
+	
+	@GetMapping("/deleteAdmin/{id}")
+	public String deleteAdmin(@PathVariable (value = "id") long id) {
+		// call delete employee method 
+		this.adminService.deleteAdminById(id);
 		return "redirect:/admin/";
 	}
 

@@ -25,9 +25,8 @@
 						<td th:text="${admin.lastName}"></td>
 						<td th:text="${admin.email}"></td>
 						<td>
-							<a th:href="@{/api/admins/{id}(id=${admin.id})}" class="btn btn-primary">View</a>
-							<a th:href="@{/api/admins/{id}/edit(id=${admin.id})}" class="btn btn-success">Edit</a>
-							<a th:href="@{/api/admins/{id}(id=${admin.id})}" class="btn btn-danger">Delete</a>
+							<a th:href="@{/admin/showFormForUpdate/{id}(id=${admin.id})}" class="btn btn-primary">Update</a>
+							<a th:href="@{/admin/deleteEmployee/{id}(id=${admin.id})}" class="btn btn-danger">Delete</a>
 						</td>
 					</tr>
 				</tbody>

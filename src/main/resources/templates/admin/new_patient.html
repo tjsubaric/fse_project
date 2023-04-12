@@ -14,7 +14,7 @@
 		<hr>
 		<h2>Save Patient</h2>
 
-		<form action="/api/admins/patients" th:object="${patient}" method="POST" onsubmit="return validateForm()">
+		<form action="/admin/patient_board/savePatient" th:action="@{savePatient}" th:object="${patient}" method="POST" onsubmit="return validateForm()">
 			<input type="text" th:field="*{firstName}"
 				placeholder="Patient First Name" class="form-control mb-4 col-4">
 				
@@ -32,5 +32,16 @@
 		<hr>
 		<a th:href="@{/admin/patient_board}">Back to Patient List</a>
 	</div>
+	<script>
+		function validateForm() {
+			var password = document.getElementsByName("password")[0].value;
+			var confirmPassword = document.getElementById("confirmPassword").value;
+
+			if (password != confirmPassword) {
+				alert("Passwords do not match.");
+				return false;
+			}
+		}
+	</script>
 </body>
 </html>

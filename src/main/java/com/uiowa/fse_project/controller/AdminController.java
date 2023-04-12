@@ -18,6 +18,7 @@ import com.uiowa.fse_project.model.Employee;
 import com.uiowa.fse_project.model.Patient;
 import com.uiowa.fse_project.service.AdminService;
 import com.uiowa.fse_project.service.EmployeeService;
+import com.uiowa.fse_project.service.PatientService;
 
 
 @Controller
@@ -27,17 +28,15 @@ public class AdminController {
 	@Autowired
     private EmployeeService employeeService;
 
+	@Autowired
+    private PatientService patientService;
+
     @Autowired
     private AdminService adminService;
 
 	@GetMapping("/")
 	public String viewHomePage(Model model) {
 		return findPaginated(1, "firstName", "asc", model);		
-	}
-
-	@GetMapping("/patient_board")
-	public String showPatientBoard() {
-    	return "admin/patient_board";
 	}
 
 	@GetMapping("/employee_board")
@@ -62,6 +61,27 @@ public class AdminController {
 		return "admin/employee_board";
 	}
 
+	@GetMapping("/patient_board")
+	public String showPatientBoard(Model model, @RequestParam(defaultValue = "1") int pageNo,
+								  @RequestParam(defaultValue = "firstName") String sortField,
+	                              @RequestParam(defaultValue = "asc") String sortDir) {
+		int pageSize = 5;
+
+		Page<Patient> page = patientService.findPatientPaginated(pageNo, pageSize, sortField, sortDir);
+		List<Patient> patients = page.getContent();
+
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+
+		model.addAttribute("patients", patients);
+
+		return "admin/patient_board";
+	}
 
 	@GetMapping("/new_admin")
 	public String showNewAdminForm(Model model) {
@@ -83,16 +103,20 @@ public class AdminController {
 
     @PostMapping("/saveAdmin")
 	public String saveAdmin(@ModelAttribute("admin") Admin admin) {
-		// save employee to database
 		adminService.saveAdmin(admin);
 		return "redirect:/admin/";
 	}
 
 	@PostMapping("/employee_board/saveEmployee")
 	public String saveEmployee(@ModelAttribute("employee") Employee employee) {
-		// save employee to database
 		employeeService.saveEmployee(employee);
 		return "redirect:/admin/employee_board";
+	}
+
+	@PostMapping("/patient_board/savePatient")
+	public String savePatient(@ModelAttribute("patient") Patient patient) {
+		patientService.savePatient(patient);
+		return "redirect:/admin/patient_board";
 	}
 
 	@GetMapping("/showFormForUpdate/{id}")
@@ -111,9 +135,14 @@ public class AdminController {
 
 	@GetMapping("/employee_board/deleteEmployee/{id}")
 	public String deleteEmployee(@PathVariable (value = "id") long id) {
-		// call delete employee method 
 		this.employeeService.deleteEmployeeById(id);
 		return "redirect:/admin/employee_board";
+	}
+
+	@GetMapping("/patient_board/deletePatient/{id}")
+	public String deletePatient(@PathVariable (value = "id") long id) {
+		this.patientService.deletePatientById(id);
+		return "redirect:/admin/patient_board";
 	}
 
 	@GetMapping("/page/{pageNo}")

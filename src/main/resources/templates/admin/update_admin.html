@@ -12,29 +12,28 @@
 	<div class="container">
 		<h1>Admin Management System</h1>
 		<hr>
-		<h2>Save Admin</h2>
+		<h2>Update Admin</h2>
 
 		<form action="#" th:action="@{saveAdmin}" th:object="${admin}"
 			method="POST" onsubmit="return validateForm()">
 			
-			<input type="text" th:field="*{firstName}"
-				placeholder="First Name" class="form-control mb-4 col-4">
+			<input type="hidden" th:field="*{id}" />
 
-				<input type="text" th:field="*{lastName}"
-				placeholder="Last Name" class="form-control mb-4 col-4">
+			    <input type="text" th:field="*{firstName}" class="form-control mb-4 col-4">
 				
-				<input type="email" th:field="*{email}"
-				placeholder="Admin Email" class="form-control mb-4 col-4">
+				<input type="text" th:field="*{lastName}" class="form-control mb-4 col-4">
+				
+				<input type="email" th:field="*{email}" class="form-control mb-4 col-4">
 
-				<input type="password" id="password" th:field="*{password}" placeholder="Enter Password" class="form-control mb-4 col-4">
-  				<input type="password" id="confirmPassword" th:field="*{password}" placeholder="Confirm Password" class="form-control mb-4 col-4">
+				<input type="password" id="password" th:field="*{password}" class="form-control mb-4 col-4">
+  				<input type="password" id="confirmPassword" th:field="*{password}" class="form-control mb-4 col-4">
 				
-				<button type="submit" id="submitButton" class="btn btn-info col-2"> Save Admin</button>
+				<button type="submit" id="submitButton" class="btn btn-info col-2"> Update Admin </button>
 		</form>
 		<hr>
 		<a th:href = "@{/admin/}"> Back to Admin List</a>
 	</div>
-	<script>
+    <script>
 		function validateForm() {
 			var password = document.getElementsByName("password")[0].value;
 			var confirmPassword = document.getElementById("confirmPassword").value;

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uiowa.fse_project.model.Admin;
 import com.uiowa.fse_project.model.Employee;
+import com.uiowa.fse_project.model.Patient;
 import com.uiowa.fse_project.service.AdminService;
 import com.uiowa.fse_project.service.EmployeeService;
 
@@ -58,11 +59,24 @@ public class AdminController {
 		return "admin/new_employee";
 	}
 
+	@GetMapping("/patient_board/new_patient")
+	public String showNewPatientForm(Model model) {
+		model.addAttribute("patient", new Patient());
+		return "admin/new_patient";
+	}
+
     @PostMapping("/saveAdmin")
 	public String saveAdmin(@ModelAttribute("admin") Admin admin) {
 		// save employee to database
 		adminService.saveAdmin(admin);
 		return "redirect:/admin/";
+	}
+
+	@PostMapping("/saveEmployee")
+	public String saveEmployee(@ModelAttribute("employee") Employee employee) {
+		// save employee to database
+		employeeService.saveEmployee(employee);
+		return "redirect:/admin/employee_board";
 	}
 
 	@GetMapping("/showFormForUpdate/{id}")

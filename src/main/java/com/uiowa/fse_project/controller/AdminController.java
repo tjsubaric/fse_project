@@ -81,11 +81,7 @@ public class AdminController {
 
 	@GetMapping("/showFormForUpdate/{id}")
 	public String showFormForUpdate(@PathVariable ( value = "id") long id, Model model) {
-		
-		// get employee from the service
 		Admin admin = adminService.getAdminById(id);
-		
-		// set employee as a model attribute to pre-populate the form
 		model.addAttribute("admin", admin);
 		return "admin/update_admin";
 	}

@@ -11,5 +11,5 @@ public interface PatientService {
     void savePatient(Patient patient);
     Patient getPatientById(long id);
     void deletePatientById(long id);
-    Page<Patient> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
+    Page<Patient> findPatientPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
 }

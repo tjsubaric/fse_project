@@ -52,6 +52,12 @@ public class AdminController {
 		return "admin/new_admin";
 	}
 
+	@GetMapping("/employee_board/new_employee")
+	public String showNewEmployeeForm(Model model) {
+		model.addAttribute("employee", new Employee());
+		return "admin/new_employee";
+	}
+
     @PostMapping("/saveAdmin")
 	public String saveAdmin(@ModelAttribute("admin") Admin admin) {
 		// save employee to database

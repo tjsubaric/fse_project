@@ -23,6 +23,11 @@ public class Employee {
 	
 	@Column(name = "email")
 	private String email;
+
+	@Column(name = "password")
+	private String password;
+    @Column(name = "role")
+	private String role = "ROLE_EMPLOYEE";
 	public long getId() {
 		return id;
 	}
@@ -50,4 +55,18 @@ public class Employee {
     public boolean isPresent() {
         return false;
     }
+
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

@@ -40,12 +40,35 @@ public class AdminController {
     	return "admin/patient_board";
 	}
 
+	// @GetMapping("/employee_board")
+    // public String showEmployeeBoard(Model model) {
+    //     List<Employee> employees = employeeService.getAllEmployees();
+    //     model.addAttribute("employees", employees);
+    //     return "admin/employee_board";
+    // }
+
 	@GetMapping("/employee_board")
-    public String showEmployeeBoard(Model model) {
-        List<Employee> employees = employeeService.getAllEmployees();
-        model.addAttribute("employees", employees);
-        return "admin/employee_board";
-    }
+	public String showEmployeeBoard(Model model, @RequestParam(defaultValue = "1") int pageNo,
+									@RequestParam(defaultValue = "firstName") String sortField,
+									@RequestParam(defaultValue = "asc") String sortDir) {
+		int pageSize = 5;
+
+		Page<Employee> page = employeeService.findEmployeePaginated(pageNo, pageSize, sortField, sortDir);
+		List<Employee> employees = page.getContent();
+
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+
+		model.addAttribute("employees", employees);
+
+		return "admin/employee_board";
+	}
+
 
 	@GetMapping("/new_admin")
 	public String showNewAdminForm(Model model) {
@@ -72,7 +95,7 @@ public class AdminController {
 		return "redirect:/admin/";
 	}
 
-	@PostMapping("/saveEmployee")
+	@PostMapping("/employee_board/saveEmployee")
 	public String saveEmployee(@ModelAttribute("employee") Employee employee) {
 		// save employee to database
 		employeeService.saveEmployee(employee);

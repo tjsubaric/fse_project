@@ -40,13 +40,6 @@ public class AdminController {
     	return "admin/patient_board";
 	}
 
-	// @GetMapping("/employee_board")
-    // public String showEmployeeBoard(Model model) {
-    //     List<Employee> employees = employeeService.getAllEmployees();
-    //     model.addAttribute("employees", employees);
-    //     return "admin/employee_board";
-    // }
-
 	@GetMapping("/employee_board")
 	public String showEmployeeBoard(Model model, @RequestParam(defaultValue = "1") int pageNo,
 									@RequestParam(defaultValue = "firstName") String sortField,
@@ -114,6 +107,13 @@ public class AdminController {
 		// call delete employee method 
 		this.adminService.deleteAdminById(id);
 		return "redirect:/admin/";
+	}
+
+	@GetMapping("/employee_board/deleteEmployee/{id}")
+	public String deleteEmployee(@PathVariable (value = "id") long id) {
+		// call delete employee method 
+		this.employeeService.deleteEmployeeById(id);
+		return "redirect:/admin/employee_board";
 	}
 
 	@GetMapping("/page/{pageNo}")

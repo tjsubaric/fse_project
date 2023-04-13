@@ -119,17 +119,30 @@ public class AdminController {
 		return "redirect:/admin/patient_board";
 	}
 
-	@GetMapping("/showFormForUpdate/{id}")
-	public String showFormForUpdate(@PathVariable ( value = "id") long id, Model model) {
+	@GetMapping("/showFormAdminUpdate/{id}")
+	public String showFormAdminUpdate(@PathVariable ( value = "id") long id, Model model) {
 		Admin admin = adminService.getAdminById(id);
 		model.addAttribute("admin", admin);
 		return "admin/update_admin";
 	}
 
-	@PostMapping("/showFormForUpdate/{id}")
+	@PostMapping("/showFormAdminUpdate/{id}")
 	public String updateAdmin(@PathVariable(value = "id") long id, @ModelAttribute("admin") Admin admin) {
 		adminService.saveAdmin(admin);
 		return "redirect:/admin/";
+	}
+
+	@GetMapping("/employee_board/showFormEmployeeUpdate/{id}")
+	public String showFormEmployeeUpdate(@PathVariable ( value = "id") long id, Model model) {
+		Employee employee = employeeService.getEmployeeById(id);
+		model.addAttribute("employee", employee);
+		return "admin/update_employee";
+	}
+
+	@PostMapping("/employee_board/showFormEmployeeUpdate/{id}")
+	public String updateEmployee(@PathVariable(value = "id") long id, @ModelAttribute("admin") Employee employee) {
+		employeeService.saveEmployee(employee);
+		return "redirect:/admin/employee_board";
 	}
 	
 	@GetMapping("/deleteAdmin/{id}")

@@ -13,9 +13,7 @@ public class UserDtls {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-
-	//private String username;
+	private long id;
 
 	private String firstName;
 

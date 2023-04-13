@@ -14,8 +14,7 @@
 		<hr>
 		<h2>Update Admin</h2>
 
-		<form action="#" th:action="@{saveAdmin}" th:object="${admin}"
-			method="POST" onsubmit="return validateForm()">
+		<form action="/admin/saveAdmin" th:object="${admin}" method="POST" onsubmit="return validateForm()">
 			
 			<input type="hidden" th:field="*{id}" />
 

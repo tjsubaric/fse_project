@@ -125,6 +125,12 @@ public class AdminController {
 		model.addAttribute("admin", admin);
 		return "admin/update_admin";
 	}
+
+	@PostMapping("/showFormForUpdate/{id}")
+	public String updateAdmin(@PathVariable(value = "id") long id, @ModelAttribute("admin") Admin admin) {
+		adminService.saveAdmin(admin);
+		return "redirect:/admin/";
+	}
 	
 	@GetMapping("/deleteAdmin/{id}")
 	public String deleteAdmin(@PathVariable (value = "id") long id) {

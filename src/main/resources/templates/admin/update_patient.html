@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Employee Management System</title>
+<title>Patient Management System</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -10,11 +10,11 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Employee Management System</h1>
+		<h1>Patient Management System</h1>
 		<hr>
-		<h2>Save Employee</h2>
+		<h2>Save Patient</h2>
 
-		<form action="/admin/employee_board/saveEmployee" th:object="${employee}" method="POST" onsubmit="return validateForm()">
+		<form action="/admin/patient_board/savePatient" th:object="${patient}" method="POST" onsubmit="return validateForm()">
 			<input type="hidden" th:field="*{id}" />
 			
 				<input type="text" th:field="*{firstName}" placeholder="Employee First Name" class="form-control mb-4 col-4">
@@ -26,10 +26,10 @@
 				<input type="password" id="password" th:field="*{password}" placeholder="Enter Password" class="form-control mb-4 col-4">
   				<input type="password" id="confirmPassword" th:field="*{password}" placeholder="Confirm Password" class="form-control mb-4 col-4">
 				
-				<button type="submit" id="submitButton" class="btn btn-info col-2"> Update Employee</button>
+				<button type="submit" id="submitButton" class="btn btn-info col-2"> Update Patient</button>
 		</form>
 		<hr>
-		<a th:href="@{/admin/employee_board}">Back to Employee List</a>
+		<a th:href="@{/admin/employee_board}">Back to Patient List</a>
 	</div>
 	<script>
 		function validateForm() {

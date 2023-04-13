@@ -144,6 +144,19 @@ public class AdminController {
 		employeeService.saveEmployee(employee);
 		return "redirect:/admin/employee_board";
 	}
+
+	@GetMapping("/patient_board/showFormPatientUpdate/{id}")
+	public String showFormPatientUpdate(@PathVariable ( value = "id") long id, Model model) {
+		Patient patient = patientService.getPatientById(id);
+		model.addAttribute("patient", patient);
+		return "admin/update_patient";
+	}
+
+	@PostMapping("/patient_board/showFormPatientUpdate/{id}")
+	public String updatePatient(@PathVariable(value = "id") long id, @ModelAttribute("admin") Patient patient) {
+		patientService.savePatient(patient);
+		return "redirect:/admin/patient_board";
+	}
 	
 	@GetMapping("/deleteAdmin/{id}")
 	public String deleteAdmin(@PathVariable (value = "id") long id) {

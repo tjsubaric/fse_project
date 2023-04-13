@@ -25,7 +25,7 @@
 						<td th:text="${patient.lastName}"></td>
 						<td th:text="${patient.email}"></td>
 						<td>
-							<a th:href="@{/api/admins/{id}/edit(id=${patient.id})}" class="btn btn-primary">Update</a>
+							<a th:href="@{/admin/patient_board/showFormPatientUpdate/{id}(id=${patient.id})}" class="btn btn-primary">Update</a>
 							<a th:href="@{/admin/patient_board/deletePatient/{id}(id=${patient.id})}" class="btn btn-danger">Delete</a>
 						</td>
 					</tr>

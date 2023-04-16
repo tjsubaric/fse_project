@@ -17,8 +17,6 @@ import com.uiowa.fse_project.model.Admin;
 import com.uiowa.fse_project.model.Employee;
 import com.uiowa.fse_project.model.Patient;
 import com.uiowa.fse_project.service.AdminService;
-import com.uiowa.fse_project.service.PatientService;
-
 
 @Controller
 @RequestMapping("/admin")

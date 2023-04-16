@@ -11,7 +11,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.uiowa.fse_project.model.Admin;
+import com.uiowa.fse_project.model.Employee;
+import com.uiowa.fse_project.model.Patient;
 import com.uiowa.fse_project.repository.AdminRepository;
+import com.uiowa.fse_project.repository.EmployeeRepository;
+import com.uiowa.fse_project.repository.PatientRepository;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -19,6 +23,11 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private AdminRepository adminRepository;
 
+	@Autowired
+	private EmployeeRepository employeeRepository;
+
+	@Autowired
+	private PatientRepository patientRepository;
 
 	@Override
 	public List<Admin> getAllAdmins() {
@@ -26,8 +35,28 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
+	public List<Employee> getAllEmployees() {
+		return employeeRepository.findAll();
+	}
+
+	@Override
+	public List<Patient> getAllPatients() {
+		return patientRepository.findAll();
+	}
+
+	@Override
 	public void saveAdmin(Admin admin) {
 		this.adminRepository.save(admin);
+	}
+
+	@Override
+	public void saveEmployee(Employee employee) {
+		this.employeeRepository.save(employee);
+	}
+
+	@Override
+	public void savePatient(Patient patient) {
+		this.patientRepository.save(patient);
 	}
 
 	@Override
@@ -43,8 +72,42 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
+	public Employee getEmployeeById(long id) {
+		Optional<Employee> optional = employeeRepository.findById(id);
+		Employee employee = null;
+		if (optional.isPresent()) {
+			employee = optional.get();
+		} else {
+			throw new RuntimeException(" Employee not found for id :: " + id);
+		}
+		return employee;
+	}
+
+	@Override
+	public Patient getPatientById(long id) {
+		Optional<Patient> optional = patientRepository.findById(id);
+		Patient patient = null;
+		if (optional.isPresent()) {
+			patient = optional.get();
+		} else {
+			throw new RuntimeException(" Patient not found for id :: " + id);
+		}
+		return patient;
+	}
+
+	@Override
 	public void deleteAdminById(long id) {
 		this.adminRepository.deleteById(id);
+	}
+
+	@Override
+	public void deleteEmployeeById(long id) {
+		this.employeeRepository.deleteById(id);
+	}
+
+	@Override
+	public void deletePatientById(long id) {
+		this.patientRepository.deleteById(id);
 	}
 
 	@Override
@@ -54,6 +117,24 @@ public class AdminServiceImpl implements AdminService {
 		
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
 		return this.adminRepository.findAll(pageable);
+	}
+
+	@Override
+	public Page<Employee> findEmployeePaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+			Sort.by(sortField).descending();
+		
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+		return this.employeeRepository.findAll(pageable);
+	}
+
+	@Override
+	public Page<Patient> findPatientPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+			Sort.by(sortField).descending();
+		
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+		return this.patientRepository.findAll(pageable);
 	}
 
 }

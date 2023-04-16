@@ -2,8 +2,11 @@ package com.uiowa.fse_project.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.uiowa.fse_project.model.Admin;
 import com.uiowa.fse_project.model.Employee;
 import com.uiowa.fse_project.model.Patient;
+import com.uiowa.fse_project.model.UserDtls;
 import com.uiowa.fse_project.service.AdminService;
+import com.uiowa.fse_project.service.UserService;
 
 @Controller
 @RequestMapping("/admin")
@@ -24,6 +29,12 @@ public class AdminController {
 
     @Autowired
     private AdminService adminService;
+
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private BCryptPasswordEncoder passwordEncode;
 
 	@GetMapping("/")
 	public String viewHomePage(Model model) {
@@ -93,14 +104,58 @@ public class AdminController {
 	}
 
     @PostMapping("/saveAdmin")
-	public String saveAdmin(@ModelAttribute("admin") Admin admin) {
-		adminService.saveAdmin(admin);
+	public String saveAdmin(@ModelAttribute UserDtls user, HttpSession session) {
+
+		boolean f = userService.checkEmail(user.getEmail());
+
+		if (f) {
+			session.setAttribute("msg", "Email Id alreday exists");
+		}
+
+		else {
+			UserDtls userDtls = userService.createAdmin(user);
+			if (userDtls != null) {
+				// create a new Patient object and set the necessary properties
+				Admin admin = new Admin();
+				admin.setFirstName(user.getFirstName());
+				admin.setLastName(user.getLastName());
+				admin.setEmail(user.getEmail());
+				admin.setPassword(passwordEncode.encode(user.getPassword()));
+				// pass the patient object to the adminService.savePatient() method
+				adminService.saveAdmin(admin);
+				session.setAttribute("msg", "Register Sucessfully");
+			} else {
+				session.setAttribute("msg", "Something wrong on server");
+			}
+		}
 		return "redirect:/admin/";
 	}
 
 	@PostMapping("/employee_board/saveEmployee")
-	public String saveEmployee(@ModelAttribute("employee") Employee employee) {
-		adminService.saveEmployee(employee);
+	public String saveEmployee(@ModelAttribute UserDtls user, HttpSession session) {
+
+		boolean f = userService.checkEmail(user.getEmail());
+
+		if (f) {
+			session.setAttribute("msg", "Email Id alreday exists");
+		}
+
+		else {
+			UserDtls userDtls = userService.createEmployee(user);
+			if (userDtls != null) {
+				// create a new Patient object and set the necessary properties
+				Employee employee = new Employee();
+				employee.setFirstName(user.getFirstName());
+				employee.setLastName(user.getLastName());
+				employee.setEmail(user.getEmail());
+				employee.setPassword(passwordEncode.encode(user.getPassword()));
+				// pass the patient object to the adminService.savePatient() method
+				adminService.saveEmployee(employee);
+				session.setAttribute("msg", "Register Sucessfully");
+			} else {
+				session.setAttribute("msg", "Something wrong on server");
+			}
+		}
 		return "redirect:/admin/employee_board";
 	}
 

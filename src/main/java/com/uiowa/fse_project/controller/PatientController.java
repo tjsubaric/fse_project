@@ -14,7 +14,7 @@ import com.uiowa.fse_project.repository.UserRepository;
 
 @Controller
 @RequestMapping("/patient")
-public class UserController {
+public class PatientController {
 
 	@Autowired
 	private UserRepository userRepo;

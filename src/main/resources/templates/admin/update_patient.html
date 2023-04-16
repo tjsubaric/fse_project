@@ -14,7 +14,7 @@
 		<hr>
 		<h2>Save Patient</h2>
 
-		<form action="/admin/patient_board/savePatient" th:object="${patient}" method="POST" onsubmit="return validateForm()">
+		<form action="/admin/patient_board/savePatient" th:object="${patient}" method="POST">
 			<input type="hidden" th:field="*{id}" />
 			
 				<input type="text" th:field="*{firstName}" placeholder="Employee First Name" class="form-control mb-4 col-4">
@@ -22,25 +22,11 @@
 				<input type="text" th:field="*{lastName}" placeholder="Employee Last Name" class="form-control mb-4 col-4">
 				
 				<input type="email" th:field="*{email}" placeholder="Employee Email" class="form-control mb-4 col-4">
-
-				<input type="password" id="password" th:field="*{password}" placeholder="Enter Password" class="form-control mb-4 col-4">
-  				<input type="password" id="confirmPassword" th:field="*{password}" placeholder="Confirm Password" class="form-control mb-4 col-4">
 				
 				<button type="submit" id="submitButton" class="btn btn-info col-2"> Update Patient</button>
 		</form>
 		<hr>
 		<a th:href="@{/admin/employee_board}">Back to Patient List</a>
 	</div>
-	<script>
-		function validateForm() {
-			var password = document.getElementsByName("password")[0].value;
-			var confirmPassword = document.getElementById("confirmPassword").value;
-
-			if (password != confirmPassword) {
-				alert("Passwords do not match.");
-				return false;
-			}
-		}
-	</script>
 </body>
 </html>

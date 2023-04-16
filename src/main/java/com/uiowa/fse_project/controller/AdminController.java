@@ -17,19 +17,12 @@ import com.uiowa.fse_project.model.Admin;
 import com.uiowa.fse_project.model.Employee;
 import com.uiowa.fse_project.model.Patient;
 import com.uiowa.fse_project.service.AdminService;
-import com.uiowa.fse_project.service.EmployeeService;
 import com.uiowa.fse_project.service.PatientService;
 
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-
-	@Autowired
-    private EmployeeService employeeService;
-
-	@Autowired
-    private PatientService patientService;
 
     @Autowired
     private AdminService adminService;
@@ -45,7 +38,7 @@ public class AdminController {
 									@RequestParam(defaultValue = "asc") String sortDir) {
 		int pageSize = 5;
 
-		Page<Employee> page = employeeService.findEmployeePaginated(pageNo, pageSize, sortField, sortDir);
+		Page<Employee> page = adminService.findEmployeePaginated(pageNo, pageSize, sortField, sortDir);
 		List<Employee> employees = page.getContent();
 
 		model.addAttribute("currentPage", pageNo);
@@ -67,7 +60,7 @@ public class AdminController {
 	                              @RequestParam(defaultValue = "asc") String sortDir) {
 		int pageSize = 5;
 
-		Page<Patient> page = patientService.findPatientPaginated(pageNo, pageSize, sortField, sortDir);
+		Page<Patient> page = adminService.findPatientPaginated(pageNo, pageSize, sortField, sortDir);
 		List<Patient> patients = page.getContent();
 
 		model.addAttribute("currentPage", pageNo);
@@ -109,13 +102,13 @@ public class AdminController {
 
 	@PostMapping("/employee_board/saveEmployee")
 	public String saveEmployee(@ModelAttribute("employee") Employee employee) {
-		employeeService.saveEmployee(employee);
+		adminService.saveEmployee(employee);
 		return "redirect:/admin/employee_board";
 	}
 
 	@PostMapping("/patient_board/savePatient")
 	public String savePatient(@ModelAttribute("patient") Patient patient) {
-		patientService.savePatient(patient);
+		adminService.savePatient(patient);
 		return "redirect:/admin/patient_board";
 	}
 
@@ -134,27 +127,27 @@ public class AdminController {
 
 	@GetMapping("/employee_board/showFormEmployeeUpdate/{id}")
 	public String showFormEmployeeUpdate(@PathVariable ( value = "id") long id, Model model) {
-		Employee employee = employeeService.getEmployeeById(id);
+		Employee employee = adminService.getEmployeeById(id);
 		model.addAttribute("employee", employee);
 		return "admin/update_employee";
 	}
 
 	@PostMapping("/employee_board/showFormEmployeeUpdate/{id}")
 	public String updateEmployee(@PathVariable(value = "id") long id, @ModelAttribute("admin") Employee employee) {
-		employeeService.saveEmployee(employee);
+		adminService.saveEmployee(employee);
 		return "redirect:/admin/employee_board";
 	}
 
 	@GetMapping("/patient_board/showFormPatientUpdate/{id}")
 	public String showFormPatientUpdate(@PathVariable ( value = "id") long id, Model model) {
-		Patient patient = patientService.getPatientById(id);
+		Patient patient = adminService.getPatientById(id);
 		model.addAttribute("patient", patient);
 		return "admin/update_patient";
 	}
 
 	@PostMapping("/patient_board/showFormPatientUpdate/{id}")
 	public String updatePatient(@PathVariable(value = "id") long id, @ModelAttribute("admin") Patient patient) {
-		patientService.savePatient(patient);
+		adminService.savePatient(patient);
 		return "redirect:/admin/patient_board";
 	}
 	
@@ -167,13 +160,13 @@ public class AdminController {
 
 	@GetMapping("/employee_board/deleteEmployee/{id}")
 	public String deleteEmployee(@PathVariable (value = "id") long id) {
-		this.employeeService.deleteEmployeeById(id);
+		this.adminService.deleteEmployeeById(id);
 		return "redirect:/admin/employee_board";
 	}
 
 	@GetMapping("/patient_board/deletePatient/{id}")
 	public String deletePatient(@PathVariable (value = "id") long id) {
-		this.patientService.deletePatientById(id);
+		this.adminService.deletePatientById(id);
 		return "redirect:/admin/patient_board";
 	}
 

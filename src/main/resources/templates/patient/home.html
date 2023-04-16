@@ -11,7 +11,7 @@
 		<div class = "wrapper">
 			<div class = "left">
 				<h3> Patient:</h3>
-				<p th:text="${user.firstName + ' ' + user.lastName}"></p>
+				<p th:text="${patient.firstName + ' ' + patient.lastName}"></p>
 			</div>
 			<div class = "right">
 				<div class = "info">
@@ -19,7 +19,7 @@
 					<div class = "info_data">
 						<div class = "data">
 							<h5>Email</h5>
-							<p>[[${user.email}]]</p>
+							<p>[[${patient.email}]]</p>
 						</div>
 						<div class = "data">
 							<h5>Doctor</h5>

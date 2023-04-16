@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 	public UserDtls createUser(UserDtls user) {
 
 		user.setPassword(passwordEncode.encode(user.getPassword()));
-		user.setRole("ROLE_USER");
+		user.setRole("ROLE_PATIENT");
 
 		return userRepo.save(user);
 	}

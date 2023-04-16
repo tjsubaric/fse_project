@@ -13,7 +13,7 @@ import com.uiowa.fse_project.model.UserDtls;
 import com.uiowa.fse_project.repository.UserRepository;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/patient")
 public class UserController {
 
 	@Autowired
@@ -24,18 +24,18 @@ public class UserController {
 		String email = p.getName();
 		UserDtls user = userRepo.findByEmail(email);
 
-		m.addAttribute("user", user);
+		m.addAttribute("patient", user);
 
 	}
 
 	@GetMapping("/")
 	public String home() {
-		return "user/home";
+		return "patient/home";
 	}
 
 	@GetMapping("/appointments")
 	public String appointments() {
-		return "user/appointments";
+		return "patient/appointments";
 	}
 
 }

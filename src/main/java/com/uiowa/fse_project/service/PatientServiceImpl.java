@@ -20,7 +20,7 @@ public class PatientServiceImpl implements PatientService {
 	public Patient createPatient(Patient patient) {
 
 		patient.setPassword(passwordEncode.encode(patient.getPassword()));
-		patient.setRole("ROLE_USER");
+		patient.setRole("ROLE_PATIENT");
 
 		return patientRepo.save(patient);
 	}

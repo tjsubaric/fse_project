@@ -51,6 +51,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             )
             .formLogin(formLogin -> formLogin
                 .loginPage("/signin")
+                .usernameParameter("email") // set email as the parameter for username
+                .passwordParameter("password") // set password as the parameter for password
                 .loginProcessingUrl("/login")
                 .successHandler((request, response, authentication) -> {
                     for (GrantedAuthority authority : authentication.getAuthorities()) {

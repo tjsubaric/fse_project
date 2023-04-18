@@ -15,18 +15,26 @@
 		<h2>Save Employee</h2>
 
 		<form action="/admin/employee_board/saveEmployee" th:action="@{saveEmployee}" th:object="${employee}" method="POST" onsubmit="return validateForm()">
-			<input type="text" th:field="*{firstName}"
-				placeholder="Employee First Name" class="form-control mb-4 col-4">
-				
-				<input type="text" th:field="*{lastName}"
-				placeholder="Employee Last Name" class="form-control mb-4 col-4">
-				
-				<input type="email" th:field="*{email}"
-				placeholder="Employee Email" class="form-control mb-4 col-4">
-
-				<input type="password" id="password" th:field="*{password}" placeholder="Enter Password" class="form-control mb-4 col-4">
-  				<input type="password" id="confirmPassword" th:field="*{password}" placeholder="Confirm Password" class="form-control mb-4 col-4">
-				
+			<div class="mb-3">
+				<label>Enter Employee First Name</label> <input type="text"
+					name="firstName" class="form-control">
+			</div>
+			<div class="mb-3">
+				<label>Enter Employee Last Name</label> <input type="text"
+					name="lastName" class="form-control">
+			</div>
+			<div class="mb-3">
+				<label>Enter Employee Email</label> <input type="text" name="email"
+					class="form-control">
+			</div>
+			<div class="mb-3">
+				<label>Enter Password</label> <input type="password"
+					name="password" class="form-control">
+			</div>
+			<div class="mb-3">
+				<label>Confirm Password</label> <input type="password"
+					name="confirmPassword" id="confirmPassword" class="form-control">
+			</div>
 				<button type="submit" id="submitButton" class="btn btn-info col-2"> Save Employee</button>
 		</form>
 		<hr>

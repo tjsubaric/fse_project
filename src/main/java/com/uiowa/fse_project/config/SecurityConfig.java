@@ -44,21 +44,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(authorize -> authorize
-                .antMatchers("/api/admins/**").hasRole("ADMIN")
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/user/**").hasRole("USER")
+                .antMatchers("/patient/**").hasRole("PATIENT")
                 .antMatchers("/employee/**").hasRole("EMPLOYEE")
                 .antMatchers("/**").permitAll()
             )
             .formLogin(formLogin -> formLogin
                 .loginPage("/signin")
+                .usernameParameter("email") // set email as the parameter for username
+                .passwordParameter("password") // set password as the parameter for password
                 .loginProcessingUrl("/login")
                 .successHandler((request, response, authentication) -> {
                     for (GrantedAuthority authority : authentication.getAuthorities()) {
                         if (authority.getAuthority().equals("ROLE_ADMIN")) {
                             response.sendRedirect("/admin/");
-                        } else if (authority.getAuthority().equals("ROLE_USER")) {
-                            response.sendRedirect("/user/");
+                        } else if (authority.getAuthority().equals("ROLE_PATIENT")) {
+                            response.sendRedirect("/patient/");
                         } else if (authority.getAuthority().equals("ROLE_EMPLOYEE")) {
                             response.sendRedirect("/employee/");
                         }

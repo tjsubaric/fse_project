@@ -1,68 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-	th:replace="patient_dash::layout(~{::section})">
+th:replace = "patient_dash::layout(~{::section})">
 <head>
-<meta charset="ISO-8859-1">
-<title>Patient Appointments</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.min.css">
+    <!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+<link rel="stylesheet" href="" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" href="" th:href="@{/css/datepicker.css}">
+<link rel="stylesheet" href="" th:href="@{/css/style.css}">
+<style>
+.body{
+	width: 100%;
+	height:100%;
+	overflow: hidden;
+	background-image: url(../images/background.jpg);
+}
+</style>
 </head>
-<body>
-	<section>
-        <div class="text-center mt-5">
-          <h1>Schedule an Appointment</h1>
-          <form class="mx-auto">
-            <div class="text-center mt-5">
-                <label for="doctor-nurse">Find a Doctor/Nurse:</label>
-                <div class="col-sm-2 mx-auto">
-                  <select class="form-control" id="doctor-nurse">
-                    <option value="">-- Select Doctor/Nurse --</option>
-                    <option value="checkup">Dr. John Sins Primary Care</option>
-                    <option value="follow-up">Helen Ratched Nurse </option>
-                    <option value="consultation">Dr. John Fernandez Hand Specialist</option>
-                  </select>
-                </div>
-              </div>
-            <div class="text-center mt-5">
-              <label for="appointment-date">Pick a Date:</label>
-              <div class="col-sm-2 mx-auto">
-                <div class="input-group date" data-provide="datepicker">
-                  <input type="text" class="form-control" id="appointment-date" placeholder="mm/dd/yyyy">
-                  <div class="input-group-addon">
-                    <span class="glyphicon glyphicon-th"></span>
+  <body>
+      <section>
+        <div class="inner-layer">
+            <div class="container">
+              <div class="row no-margin">
+                  <div class="col-sm-7">
+                      <div class="content">
+                          <h1>Schedule Your Appointment Today!</h1>
+                      </div>
                   </div>
-                </div>
+                  <div class="col-sm-5">
+                      <div class="form-data">
+                          <div class="form-head">
+                              <h2>Schedule Appointemnt</h2>
+                          </div>
+                          <div class="form-body">
+                              <div class="row form-row">
+                                <input type="text" placeholder="Select Doctor" class="form-control">
+                              </div>
+                              <div class="row form-row">
+                                <input type="text" placeholder="Enter Email Adreess" class="form-control">
+                              </div>
+                            <div class="row form-row">
+                                <input id="dat" type="text" placeholder="Appointment Date" class="form-control">
+                              </div>
+                              <div class="row form-row">
+                                <button class="btn btn-success btn-appointment">
+                                  Book Appointment
+                                </button>
+                                
+                              </div>
+
+                          </div>
+                      </div>
+                  </div>
               </div>
             </div>
-            <div class="text-center mt-5">
-              <label for="appointment-time">Pick a Time:</label>
-              <div class="col-sm-2 mx-auto">
-                <div class="input-group bootstrap-timepicker timepicker">
-                  <input type="text" class="form-control input-small" id="appointment-time" placeholder="hh:mm AM/PM">
-                  <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                </div>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary mt-5">Schedule</button>
-          </form>
         </div>
       </section>
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js"></script>
-	<script>
-		$(function () {
-		    $('#appointment-date').datepicker({
-		        format: 'mm/dd/yyyy',
-		        autoclose: true,
-		        todayHighlight: true
-		    });
-		    $('#appointment-time').timepicker();
-		});
-	</script>
-</body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="" th:src = "@{/js/jquery-3.3.1.min.js}"></script>
+    <script src="" th:src = "@{/js/popper.min.js}"></script>
+    <script src="" th:src = "@{/js/bootstrap.min.js}"></script>
+    <script src="" th:src = "@{/js/bootstrap-datepicker.js}"></script>
+
+    <script>
+      $(document).ready(function(){
+          $("#dat").datepicker();
+      })
+    </script>
+  </body>
 </html>

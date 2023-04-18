@@ -32,9 +32,9 @@ public class UserController {
 		return "user/home";
 	}
 
-	@GetMapping("/temp")
+	@GetMapping("/appointments")
 	public String appointments() {
-		return "user/temp";
+		return "user/appointments";
 	}
 
 }

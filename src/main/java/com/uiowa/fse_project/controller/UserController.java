@@ -15,7 +15,6 @@ import com.uiowa.fse_project.repository.UserRepository;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-
 	@Autowired
 	private UserRepository userRepo;
 
@@ -33,9 +32,9 @@ public class UserController {
 		return "user/home";
 	}
 
-	@GetMapping("/appointments")
+	@GetMapping("/temp")
 	public String appointments() {
-		return "user/appointments";
+		return "user/temp";
 	}
 
 }

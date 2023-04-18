@@ -16,15 +16,15 @@
 
 		<form action="/admin/patient_board/savePatient" th:action="@{savePatient}" th:object="${patient}" method="POST" onsubmit="return validateForm()">
 			<div class="mb-3">
-				<label>Enter First Name</label> <input type="text"
+				<label>Enter Patient First Name</label> <input type="text"
 					name="firstName" class="form-control">
 			</div>
 			<div class="mb-3">
-				<label>Enter Last Name</label> <input type="text"
+				<label>Enter Patient Last Name</label> <input type="text"
 					name="lastName" class="form-control">
 			</div>
 			<div class="mb-3">
-				<label>Enter Email</label> <input type="text" name="email"
+				<label>Enter Patient Email</label> <input type="text" name="email"
 					class="form-control">
 			</div>
 			<div class="mb-3">

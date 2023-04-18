@@ -26,7 +26,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 		} else if (roles.contains("ROLE_EMPLOYEE")) {
 			response.sendRedirect("/employee/");
 		} else {
-			response.sendRedirect("/user/");
+			response.sendRedirect("/patient/");
 		}
 
 	}

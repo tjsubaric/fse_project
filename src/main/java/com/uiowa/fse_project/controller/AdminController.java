@@ -187,12 +187,6 @@ public class AdminController {
 		return "redirect:/admin/patient_board";
 	}
 
-	// @PostMapping("/patient_board/savePatient")
-	// public String savePatient(@ModelAttribute("patient") Patient patient) {
-	// 	adminService.savePatient(patient);
-	// 	return "redirect:/admin/patient_board";
-	// }
-
 	@GetMapping("/showFormAdminUpdate/{id}")
 	public String showFormAdminUpdate(@PathVariable ( value = "id") long id, Model model) {
 		Admin admin = adminService.getAdminById(id);

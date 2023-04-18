@@ -28,6 +28,13 @@ public class Patient {
 	private String password;
     @Column(name = "role")
 	private String role = "ROLE_USER";
+
+	@Column(name = "diagnosis")
+	private String diagnosis = "None";
+	@Column(name = "prescription")
+	private String prescription = "None";
+
+
 	public long getId() {
 		return id;
 	}
@@ -68,5 +75,19 @@ public class Patient {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+
+	public void setDiagnosis(String diagnosis) {
+		this.diagnosis = diagnosis;
+	}
+	public void setPrescription(String prescription) {
+		this.prescription = prescription;
+	}
+	public String getDiagnosis() {
+		return diagnosis;
+	}
+	public String getPrescription() {
+		return prescription;
 	}
 }

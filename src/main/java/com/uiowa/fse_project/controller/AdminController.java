@@ -160,10 +160,38 @@ public class AdminController {
 	}
 
 	@PostMapping("/patient_board/savePatient")
-	public String savePatient(@ModelAttribute("patient") Patient patient) {
-		adminService.savePatient(patient);
+	public String savePatient(@ModelAttribute UserDtls user, HttpSession session) {
+
+		boolean f = userService.checkEmail(user.getEmail());
+
+		if (f) {
+			session.setAttribute("msg", "Email Id alreday exists");
+		}
+
+		else {
+			UserDtls userDtls = userService.createUser(user);
+			if (userDtls != null) {
+				// create a new Patient object and set the necessary properties
+				Patient patient = new Patient();
+				patient.setFirstName(user.getFirstName());
+				patient.setLastName(user.getLastName());
+				patient.setEmail(user.getEmail());
+				patient.setPassword(passwordEncode.encode(user.getPassword()));
+				// pass the patient object to the adminService.savePatient() method
+				adminService.savePatient(patient);
+				session.setAttribute("msg", "Register Sucessfully");
+			} else {
+				session.setAttribute("msg", "Something wrong on server");
+			}
+		}
 		return "redirect:/admin/patient_board";
 	}
+
+	// @PostMapping("/patient_board/savePatient")
+	// public String savePatient(@ModelAttribute("patient") Patient patient) {
+	// 	adminService.savePatient(patient);
+	// 	return "redirect:/admin/patient_board";
+	// }
 
 	@GetMapping("/showFormAdminUpdate/{id}")
 	public String showFormAdminUpdate(@PathVariable ( value = "id") long id, Model model) {

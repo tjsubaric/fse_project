@@ -15,7 +15,6 @@ import com.uiowa.fse_project.repository.UserRepository;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-
 	@Autowired
 	private UserRepository userRepo;
 

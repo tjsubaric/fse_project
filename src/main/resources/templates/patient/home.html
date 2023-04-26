@@ -8,22 +8,61 @@
 </head>
 <body>
 	<section>
-		<div class = "wrapper">
-			<div class = "left">
-				<h3> Patient:</h3>
-				<p th:text="${patient.firstName + ' ' + patient.lastName}"></p>
-			</div>
-			<div class = "right">
-				<div class = "info">
-					<h3>Information:</h3>
-					<div class = "info_data">
-						<div class = "data">
-							<h5>Email</h5>
-							<p>[[${patient.email}]]</p>
+		<div class = "home-inner">
+			<div class = "wrapper">
+				<div class = "left">
+					<h3> Patient:</h3>
+					<p th:text="${patient.firstName + ' ' + patient.lastName}"></p>
+				</div>
+				<div class = "right">
+					<div class = "info">
+						<h3>Information:</h3>
+						<div class = "info_data">
+							<div class = "data">
+								<h5>Email</h5>
+								<p>[[${patient.email}]]</p>
+							</div>
+							<div class = "data">
+								<h5>Doctor</h5>
+								<p th:text="${patient.doctor}"></p>
+							</div>
 						</div>
-						<div class = "data">
-							<h5>Doctor</h5>
-							<p> empty atm</p>
+					</div>
+				</div>
+			</div>
+			<div class = "wrapper2">
+				<div class = "right">
+					<div class = "info">
+						<h3>Upcoming Appointemnt:</h3>
+						<div class = "info_data">
+							<div class = "data">
+								<h5>Doctor: [[${patient.doctor}]]</h5>
+								<h5>Date: [[${patient.appointmentdate}]]</h5>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class = "wrapper3">
+				<div class = "right">
+					<div class = "info">
+						<h3>Billing Summary:</h3>
+						<div class = "info_data">
+							<div class = "data">
+								<h5>Balance: $1000.00</h5>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class = "wrapper4">
+				<div class = "right">
+					<div class = "info">
+						<h3>Prescriptions:</h3>
+						<div class = "info_data">
+							<div class = "data">
+								<h5>Drug -------- Refills: 1</h5>
+							</div>
 						</div>
 					</div>
 				</div>

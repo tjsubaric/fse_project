@@ -7,7 +7,6 @@ th:replace = "patient_dash::layout(~{::section})">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <link rel="stylesheet" href="" th:href="@{/css/bootstrap.min.css}">
-<link rel="stylesheet" href="" th:href="@{/css/datepicker.css}">
 <link rel="stylesheet" href="" th:href="@{/css/style.css}">
 <style>
 .body{
@@ -30,27 +29,33 @@ th:replace = "patient_dash::layout(~{::section})">
                   </div>
                   <div class="col-sm-5">
                       <div class="form-data">
+                        <form action="" method="post">
                           <div class="form-head">
                               <h2>Schedule Appointemnt</h2>
+                              <div th:if="${param.submit}" class="alert alert-success">
+                                Logout Sucessful</div>
                           </div>
                           <div class="form-body">
                               <div class="row form-row">
-                                <input type="text" placeholder="Select Doctor" class="form-control">
+                                <select class="form-control" name = "doctorName">
+                                  <option value="">-- Select Doctor --</option>
+                                  <th:block th:each="employee : ${employees}">
+                                    <option th:value="${employee.id}" th:text="${employee.firstName + ' ' + employee.lastName}"></option>
+                                  </th:block>
+                                </select>
                               </div>
                               <div class="row form-row">
-                                <input type="text" placeholder="Enter Email Adreess" class="form-control">
-                              </div>
-                            <div class="row form-row">
-                                <input id="dat" type="text" placeholder="Appointment Date" class="form-control">
+                                <input type="datetime-local" class = "form-control" name = "appointmentDate">
                               </div>
                               <div class="row form-row">
-                                <button class="btn btn-success btn-appointment">
+                                <button type = "submit" class ="btn btn-success btn-appointment">
                                   Book Appointment
                                 </button>
                                 
                               </div>
 
                           </div>
+                        </form>
                       </div>
                   </div>
               </div>
@@ -59,15 +64,5 @@ th:replace = "patient_dash::layout(~{::section})">
       </section>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="" th:src = "@{/js/jquery-3.3.1.min.js}"></script>
-    <script src="" th:src = "@{/js/popper.min.js}"></script>
-    <script src="" th:src = "@{/js/bootstrap.min.js}"></script>
-    <script src="" th:src = "@{/js/bootstrap-datepicker.js}"></script>
-
-    <script>
-      $(document).ready(function(){
-          $("#dat").datepicker();
-      })
-    </script>
   </body>
 </html>

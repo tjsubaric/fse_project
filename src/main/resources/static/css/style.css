@@ -11,6 +11,13 @@ body{
 	background-color: rgba(0,147,173,0.7);
 	overflow: auto;
 }
+.home-inner{
+	position: absolute;
+	width: 100%;
+	height:100%;
+	background-color: rgb(245, 248, 248);
+	overflow: auto;
+}
 .form-data{
 	margin-top: 21%;
 	background-color: #FFF;
@@ -44,6 +51,7 @@ body{
 	border: 3px solid #0d6efd;
 }
 .btn-appointment{
+	margin-top: 20px;
 	background-color: #0d6efd !important;
 	border-color: #0d6efd !important;
 	width: 100%;
@@ -116,4 +124,52 @@ font-size: 25px;
 }
 .wrapper .right .info h3{
 border-bottom: 1px solid #070707;
+}
+
+.wrapper2 .right .info h3{
+	border-bottom: 1px solid #070707;
+}
+
+.wrapper2{
+	position : absolute !important;
+	top: 40%   !important;
+	left: 14% !important;
+	transform: translate(-40%,-14%) !important;
+	width: 600px !important;
+height: 250px;
+	display: flex !important;
+	box-shadow: 0 1px 20px 0 rgba(44, 42, 177, 0.08)!important;
+font-family: 'Josefin Sans', sans-serif ;
+}
+
+.wrapper3 .right .info h3{
+	border-bottom: 1px solid #070707;
+}
+
+.wrapper3{
+	position : absolute !important;
+	top: 55%   !important;
+	left: 18.5% !important;
+	transform: translate(-55%,-18.5%) !important;
+	width: 600px !important;
+height: 250px;
+	display: flex !important;
+	box-shadow: 0 1px 20px 0 rgba(44, 42, 177, 0.08)!important;
+font-family: 'Josefin Sans', sans-serif ;
+}
+
+.wrapper4 .right .info h3{
+	border-bottom: 1px solid #070707;
+}
+
+.wrapper4{
+	position : absolute !important;
+	top: 65%   !important;
+	left: 21.5% !important;
+	transform: translate(-65%,-21.5%) !important;
+	width: 600px !important;
+height: 250px;
+	display: flex !important;
+	box-shadow: 0 1px 20px 0 rgba(44, 42, 177, 0.08)!important;
+font-family: 'Josefin Sans', sans-serif ;
 }

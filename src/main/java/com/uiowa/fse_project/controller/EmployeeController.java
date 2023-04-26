@@ -13,4 +13,14 @@ public class EmployeeController {
 		return "employee/home";
 	}
 
+	@GetMapping("/schedule")
+	public String showEmployeeSchedule(){
+		return "employee/schedule";
+	}
+
+	@GetMapping("/mypatients")
+	public String showMyPatients(){
+		return "employee/mypatients";
+	}
+
 }

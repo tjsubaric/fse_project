@@ -91,6 +91,12 @@ public class AdminController {
 		return "admin/new_admin";
 	}
 
+	@GetMapping("/create_appointment")
+	public String showNewAppointmentForm(Model model) {
+		model.addAttribute("admin", new Admin());
+		return "admin/new_admin";
+	}
+
 	@GetMapping("/employee_board/new_employee")
 	public String showNewEmployeeForm(Model model) {
 		model.addAttribute("employee", new Employee());

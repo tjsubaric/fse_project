@@ -17,9 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uiowa.fse_project.model.Admin;
+import com.uiowa.fse_project.model.Appointments;
 import com.uiowa.fse_project.model.Employee;
 import com.uiowa.fse_project.model.Patient;
 import com.uiowa.fse_project.model.UserDtls;
+import com.uiowa.fse_project.repository.EmployeeRepository;
+import com.uiowa.fse_project.repository.PatientRepository;
 import com.uiowa.fse_project.service.AdminService;
 import com.uiowa.fse_project.service.UserService;
 
@@ -34,11 +37,23 @@ public class AdminController {
 	private UserService userService;
 
 	@Autowired
+	private  PatientRepository patientRepository;
+
+	@Autowired
+	private  EmployeeRepository employeeRepository;
+
+
+	@Autowired
 	private BCryptPasswordEncoder passwordEncode;
 
 	@GetMapping("/")
 	public String viewHomePage(Model model) {
 		return findPaginated(1, "firstName", "asc", model);		
+	}
+
+	@GetMapping("/appointment_board")
+	public String showAppointmentBoard(Model model, @RequestParam(required = false) Long newAppointment) {
+		return "admin/appointment_board";
 	}
 
 	@GetMapping("/employee_board")
@@ -93,8 +108,12 @@ public class AdminController {
 
 	@GetMapping("/create_appointment")
 	public String showNewAppointmentForm(Model model) {
-		model.addAttribute("admin", new Admin());
-		return "admin/new_admin";
+		List<Employee> employees = employeeRepository.findAll();
+    	List<Patient> patients = patientRepository.findAll();
+    	model.addAttribute("employees", employees);
+    	model.addAttribute("patients", patients);
+    	model.addAttribute("admin", new Admin());
+    	return "admin/create_appointment";
 	}
 
 	@GetMapping("/employee_board/new_employee")

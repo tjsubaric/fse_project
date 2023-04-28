@@ -8,11 +8,11 @@ import java.util.List;
 public class Appointments {
     private int patientId;
     private int doctorId;
-    private int bedNumber;
+    private long bedNumber;
     private LocalDateTime dateTime;
     private List<Appointments> appointments;
 
-    public Appointments(int patientId, int doctorId, int bedNumber, LocalDateTime dateTime) {
+    public Appointments(int patientId, int doctorId, long bedNumber, LocalDateTime dateTime) {
         this.patientId = patientId;
         this.doctorId = doctorId;
         this.bedNumber = bedNumber;
@@ -43,11 +43,11 @@ public class Appointments {
         this.doctorId = doctorId;
     }
 
-    public int getBedNumber() {
+    public long getBedNumber() {
         return bedNumber;
     }
 
-    public void setBedNumber(int bedNumber) {
+    public void setBedNumber(long bedNumber) {
         this.bedNumber = bedNumber;
     }
 

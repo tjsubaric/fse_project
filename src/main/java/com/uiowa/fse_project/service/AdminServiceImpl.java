@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.uiowa.fse_project.model.Admin;
+import com.uiowa.fse_project.model.Appointments;
 import com.uiowa.fse_project.model.Employee;
 import com.uiowa.fse_project.model.Patient;
 import com.uiowa.fse_project.repository.AdminRepository;
@@ -29,6 +30,7 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private PatientRepository patientRepository;
 
+
 	@Override
 	public List<Admin> getAllAdmins() {
 		return adminRepository.findAll();
@@ -44,6 +46,11 @@ public class AdminServiceImpl implements AdminService {
 		return patientRepository.findAll();
 	}
 
+	// @Override
+    // public List<Appointments> getAllAppointments() {
+    //     return appointmentsRepository.findAll();
+    // }
+
 	@Override
 	public void saveAdmin(Admin admin) {
 		this.adminRepository.save(admin);
@@ -58,6 +65,11 @@ public class AdminServiceImpl implements AdminService {
 	public void savePatient(Patient patient) {
 		this.patientRepository.save(patient);
 	}
+
+	// @Override
+    // public void saveAppointment(Appointments appointment) {
+    //     appointmentsRepository.save(appointment);
+    // }
 
 	@Override
 	public Admin getAdminById(long id) {
@@ -95,6 +107,18 @@ public class AdminServiceImpl implements AdminService {
 		return patient;
 	}
 
+	// @Override
+	// public Appointments getAppointmentById(long bedNumber) {
+	// 	Optional<Appointments> optional = appointmentsRepository.findByBedNum(bedNumber);
+	// 	Appointments appointment = null;
+	// 	if (optional.isPresent()) {
+	// 		appointment = optional.get();
+	// 	} else {
+	// 		throw new RuntimeException("Appointment not found for id :: " + bedNumber);
+	// 	}
+	// 	return appointment;
+	// }
+
 	@Override
 	public void deleteAdminById(long id) {
 		this.adminRepository.deleteById(id);
@@ -109,6 +133,11 @@ public class AdminServiceImpl implements AdminService {
 	public void deletePatientById(long id) {
 		this.patientRepository.deleteById(id);
 	}
+
+	// @Override
+    // public void deleteAppointmentById(long id) {
+    //     appointmentsRepository.deleteById(id);
+    // }
 
 	@Override
 	public Page<Admin> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
@@ -136,5 +165,13 @@ public class AdminServiceImpl implements AdminService {
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
 		return this.patientRepository.findAll(pageable);
 	}
+
+	// @Override
+    // public Page<Appointments> findAppointmentPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+    //     Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+    //             Sort.by(sortField).descending();
+    //     PageRequest pageRequest = PageRequest.of(pageNo - 1, pageSize, sort);
+    //     return appointmentsRepository.findAll(pageRequest);
+    // }
 
 }

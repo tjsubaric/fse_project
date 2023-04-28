@@ -31,9 +31,7 @@ public interface AdminService {
     Page<Patient> findPatientPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
 
     // // all update Appointment methods
-	// List<Appointments> getAllAppointments();
-    // void saveAppointment(Appointments appointment);
-    // Appointments getAppointmentById(long id);
-    // void deleteAppointmentById(long id);
-    // Page<Appointments> findAppointmentPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
+    //void saveAppointment(Appointments appointment);
+   // Appointments getAppointmentById(long id);
+    //Page<Appointments> findAppointmentPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
 }

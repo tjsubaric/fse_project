@@ -5,50 +5,60 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Appointments {
-    private int patientId;
-    private int doctorId;
-    private long bedNumber;
-    private LocalDateTime dateTime;
-    private List<Appointments> appointments;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-    public Appointments(int patientId, int doctorId, long bedNumber, LocalDateTime dateTime) {
+@Entity
+@Table(name = "appointments")
+public class Appointments {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(name = "patient_id")
+    private String patientId;
+
+    @Column(name = "doctor_id")
+    private String doctorId;
+
+    @Column(name = "date_time")
+    private LocalDateTime dateTime;
+
+    public Appointments(String patientId, String doctorId, LocalDateTime dateTime) {
         this.patientId = patientId;
         this.doctorId = doctorId;
-        this.bedNumber = bedNumber;
         this.dateTime = dateTime;
     }
 
     public Appointments() {
-        appointments = new ArrayList<>();
     }
 
-    public void setAppointments(ArrayList<Appointments> appointments) {
-        this.appointments = appointments;
+    public long getId() {
+        return id;
     }
 
-    public int getPatientId() {
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getPatientId() {
         return patientId;
     }
 
-    public void setPatientId(int patientId) {
+    public void setPatientId(String patientId) {
         this.patientId = patientId;
     }
 
-    public int getDoctorId() {
+    public String getDoctorId() {
         return doctorId;
     }
 
-    public void setDoctorId(int doctorId) {
+    public void setDoctorId(String doctorId) {
         this.doctorId = doctorId;
-    }
-
-    public long getBedNumber() {
-        return bedNumber;
-    }
-
-    public void setBedNumber(long bedNumber) {
-        this.bedNumber = bedNumber;
     }
 
     public LocalDateTime getDateTime() {
@@ -57,19 +67,5 @@ public class Appointments {
 
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
-    }
-
-    public void addAppointment(int patientId, int doctorId, int bedNumber, LocalDateTime dateTime) {
-        Appointments appointment = new Appointments(patientId, doctorId, bedNumber, dateTime);
-        appointments.add(appointment);
-    }
-
-    public void createAppointment(int patientId, int doctorId, int bedNumber, LocalDateTime dateTime) {
-        Appointments appointments = new Appointments();
-        appointments.addAppointment(patientId, doctorId, bedNumber, dateTime);
-    }
-
-    public List<Appointments> getAppointments() {
-        return appointments;
     }
 }

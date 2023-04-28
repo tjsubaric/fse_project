@@ -9,12 +9,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.yaml.snakeyaml.tokens.Token.ID;
 
 import com.uiowa.fse_project.model.Admin;
 import com.uiowa.fse_project.model.Appointments;
 import com.uiowa.fse_project.model.Employee;
 import com.uiowa.fse_project.model.Patient;
 import com.uiowa.fse_project.repository.AdminRepository;
+import com.uiowa.fse_project.repository.AppointmentsRepository;
 import com.uiowa.fse_project.repository.EmployeeRepository;
 import com.uiowa.fse_project.repository.PatientRepository;
 
@@ -30,6 +32,8 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private PatientRepository patientRepository;
 
+	@Autowired
+	private AppointmentsRepository appointmentsRepository;
 
 	@Override
 	public List<Admin> getAllAdmins() {
@@ -45,11 +49,6 @@ public class AdminServiceImpl implements AdminService {
 	public List<Patient> getAllPatients() {
 		return patientRepository.findAll();
 	}
-
-	// @Override
-    // public List<Appointments> getAllAppointments() {
-    //     return appointmentsRepository.findAll();
-    // }
 
 	@Override
 	public void saveAdmin(Admin admin) {
@@ -68,7 +67,7 @@ public class AdminServiceImpl implements AdminService {
 
 	// @Override
     // public void saveAppointment(Appointments appointment) {
-    //     appointmentsRepository.save(appointment);
+    //     this.appointmentsRepository.save(appointment);
     // }
 
 	@Override
@@ -108,13 +107,13 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	// @Override
-	// public Appointments getAppointmentById(long bedNumber) {
-	// 	Optional<Appointments> optional = appointmentsRepository.findByBedNum(bedNumber);
+	// public Appointments getAppointmentById(long id) {
+	// 	Optional<Appointments> optional = appointmentsRepository.findById(id);
 	// 	Appointments appointment = null;
 	// 	if (optional.isPresent()) {
 	// 		appointment = optional.get();
 	// 	} else {
-	// 		throw new RuntimeException("Appointment not found for id :: " + bedNumber);
+	// 		throw new RuntimeException("Appointment not found for id :: " + id);
 	// 	}
 	// 	return appointment;
 	// }
@@ -133,11 +132,6 @@ public class AdminServiceImpl implements AdminService {
 	public void deletePatientById(long id) {
 		this.patientRepository.deleteById(id);
 	}
-
-	// @Override
-    // public void deleteAppointmentById(long id) {
-    //     appointmentsRepository.deleteById(id);
-    // }
 
 	@Override
 	public Page<Admin> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
@@ -165,13 +159,5 @@ public class AdminServiceImpl implements AdminService {
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
 		return this.patientRepository.findAll(pageable);
 	}
-
-	// @Override
-    // public Page<Appointments> findAppointmentPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
-    //     Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
-    //             Sort.by(sortField).descending();
-    //     PageRequest pageRequest = PageRequest.of(pageNo - 1, pageSize, sort);
-    //     return appointmentsRepository.findAll(pageRequest);
-    // }
 
 }

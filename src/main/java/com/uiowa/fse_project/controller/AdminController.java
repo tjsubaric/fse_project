@@ -100,12 +100,6 @@ public class AdminController {
 		return "admin/patient_board";
 	}
 
-	@GetMapping("/new_admin")
-	public String showNewAdminForm(Model model) {
-		model.addAttribute("admin", new Admin());
-		return "admin/new_admin";
-	}
-
 	@GetMapping("/create_appointment")
 	public String showNewAppointmentForm(Model model) {
 		List<Employee> employees = employeeRepository.findAll();
@@ -114,6 +108,12 @@ public class AdminController {
     	model.addAttribute("patients", patients);
     	model.addAttribute("admin", new Admin());
     	return "admin/create_appointment";
+	}
+
+	@GetMapping("/new_admin")
+	public String showNewAdminForm(Model model) {
+		model.addAttribute("admin", new Admin());
+		return "admin/new_admin";
 	}
 
 	@GetMapping("/employee_board/new_employee")

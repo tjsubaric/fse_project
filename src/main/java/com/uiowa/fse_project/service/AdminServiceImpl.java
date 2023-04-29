@@ -12,11 +12,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.uiowa.fse_project.model.Admin;
-import com.uiowa.fse_project.model.Appointment;
+//import com.uiowa.fse_project.model.Appointment;
 import com.uiowa.fse_project.model.Employee;
 import com.uiowa.fse_project.model.Patient;
 import com.uiowa.fse_project.repository.AdminRepository;
-import com.uiowa.fse_project.repository.AppointmentRepository;
+//import com.uiowa.fse_project.repository.AppointmentRepository;
 import com.uiowa.fse_project.repository.EmployeeRepository;
 import com.uiowa.fse_project.repository.PatientRepository;
 
@@ -33,7 +33,7 @@ public class AdminServiceImpl implements AdminService {
 	private PatientRepository patientRepository;
 
 	@Autowired
-    private AppointmentRepository appointmentRepository;
+    //private AppointmentRepository appointmentRepository;
 
 	@Override
 	public List<Admin> getAllAdmins() {
@@ -65,26 +65,26 @@ public class AdminServiceImpl implements AdminService {
 		this.patientRepository.save(patient);
 	}
 
-	public Appointment createAppointment(Appointment appointment) {
-        // perform some business logic
-        return appointmentRepository.save(appointment);
-    }
+	// public Appointment createAppointment(Appointment appointment) {
+    //     // perform some business logic
+    //     return appointmentRepository.save(appointment);
+    // }
 
-    public Appointment saveAppointment(Long employeeId, Long patientId, LocalDateTime appointmentDate, String appointmentTime) {
+    // public Appointment saveAppointment(Long employeeId, Long patientId, LocalDateTime appointmentDate, String appointmentTime) {
         
-        Employee employee = employeeRepository.findById(employeeId).get();
-        Patient patient = patientRepository.findById(patientId).get();
+    //     Employee employee = employeeRepository.findById(employeeId).get();
+    //     Patient patient = patientRepository.findById(patientId).get();
         
-        // create a new appointment object and set the necessary properties
-        Appointment appointment = new Appointment();
-        appointment.setEmployee(employee);
-        appointment.setPatient(patient);
-        appointment.setAppointmentDate(appointmentDate);
-        appointment.setAppointmentTime(appointmentTime);
+    //     // create a new appointment object and set the necessary properties
+    //     Appointment appointment = new Appointment();
+    //     appointment.setEmployee(employee);
+    //     appointment.setPatient(patient);
+    //     appointment.setAppointmentDate(appointmentDate);
+    //     appointment.setAppointmentTime(appointmentTime);
         
-        // save the appointment to the database
-        return appointmentRepository.save(appointment);
-    }
+    //     // save the appointment to the database
+    //     return appointmentRepository.save(appointment);
+    // }
 
 	@Override
 	public Admin getAdminById(long id) {

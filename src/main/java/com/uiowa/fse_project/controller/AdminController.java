@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+//import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uiowa.fse_project.model.Admin;
-import com.uiowa.fse_project.model.Appointment;
+//import com.uiowa.fse_project.model.Appointment;
 import com.uiowa.fse_project.model.Employee;
 import com.uiowa.fse_project.model.Patient;
 import com.uiowa.fse_project.model.UserDtls;
@@ -101,15 +101,15 @@ public class AdminController {
 		return "admin/patient_board";
 	}
 
-	@GetMapping("/create_appointment")
-	public String showNewAppointmentForm(Model model) {
-		List<Employee> employees = employeeRepository.findAll();
-    	List<Patient> patients = patientRepository.findAll();
-    	model.addAttribute("employees", employees);
-    	model.addAttribute("patients", patients);
-    	model.addAttribute("admin", new Admin());
-    	return "admin/create_appointment";
-	}
+	// @GetMapping("/create_appointment")
+	// public String showNewAppointmentForm(Model model) {
+	// 	List<Employee> employees = employeeRepository.findAll();
+    // 	List<Patient> patients = patientRepository.findAll();
+    // 	model.addAttribute("employees", employees);
+    // 	model.addAttribute("patients", patients);
+    // 	model.addAttribute("admin", new Admin());
+    // 	return "admin/create_appointment";
+	// }
 
 	@GetMapping("/new_admin")
 	public String showNewAdminForm(Model model) {
@@ -129,10 +129,10 @@ public class AdminController {
 		return "admin/new_patient";
 	}
 
-	@PostMapping("/appointment_board/create_appointment")
-    public Appointment createAppointment(@RequestBody Appointment appointment) {
-        return adminService.createAppointment(appointment);
-    }
+	// @PostMapping("/appointment_board/create_appointment")
+    // public Appointment createAppointment(@RequestBody Appointment appointment) {
+    //     return adminService.createAppointment(appointment);
+    // }
 
     @PostMapping("/saveAdmin")
 	public String saveAdmin(@ModelAttribute UserDtls user, HttpSession session) {

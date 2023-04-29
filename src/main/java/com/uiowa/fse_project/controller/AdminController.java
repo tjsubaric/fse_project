@@ -37,11 +37,11 @@ public class AdminController {
 	@Autowired
 	private UserService userService;
 
-	@Autowired
-	private  PatientRepository patientRepository;
+	// @Autowired
+	// private  PatientRepository patientRepository;
 
-	@Autowired
-	private  EmployeeRepository employeeRepository;
+	// @Autowired
+	// private  EmployeeRepository employeeRepository;
 
 
 	@Autowired

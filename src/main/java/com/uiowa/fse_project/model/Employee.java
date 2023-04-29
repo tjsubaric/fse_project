@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -30,15 +28,6 @@ public class Employee {
 	private String password;
     @Column(name = "role")
 	private String role = "ROLE_EMPLOYEE";
-
-	@Column(name = "employee")
-	private long employeeId;
-
-
-	@ManyToOne
-	@JoinColumn(name = "employee", referencedColumnName = "id", insertable = false, updatable = false)
-	
-private Employee employee;
 	public long getId() {
 		return id;
 	}

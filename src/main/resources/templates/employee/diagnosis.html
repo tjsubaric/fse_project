@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="employee_dash::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Diagnosis</title>
+</head>
+<body>
+	<section>
+		<div class="container my-2">
+			<h1>Giving Diagnosis for: </h1>
+			<h4 th:text="${patient.firstName}"></h4>
+			<h4 th:text="${patient.lastName}"></h4>
+
+			<form action="/employee/mypatients/diagnosePatient" th:object="${patient}" method="POST">
+				<input type="hidden" th:field="*{id}" />
+				<input type="hidden" th:field="*{email}" />
+				<input type="hidden" th:field="*{firstName}" />
+				<input type="hidden" th:field="*{lastName}" />
+				<input type="hidden" th:field="*{password}" />
+
+				<input type="text" th:field="*{diagnosis}" placeholder="diagnosis" class="form-control mb-4 col-4">
+
+				<button type="submit" id="submitButton" class="btn btn-info col-2"> Diagnose Patient</button>
+			</form>
+			<a th:href="@{/employee/mypatients}">Back to My Patients</a>
+		</div>
+	</section>
+</body>
+</html>

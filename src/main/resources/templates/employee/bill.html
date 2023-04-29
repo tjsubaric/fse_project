@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="employee_dash::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>My Schedule Page</title>
+
+</head>
+<body>
+	<section>
+		<h1>Billing Page</h1>
+		<a th:href="@{/employee/mypatients}">Back to My Patients</a>
+	</section>
+</body>
+</html>

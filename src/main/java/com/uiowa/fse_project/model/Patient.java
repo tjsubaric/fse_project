@@ -28,7 +28,10 @@ public class Patient {
 	private String password;
     @Column(name = "role")
 	private String role = "ROLE_USER";
-
+	@Column(name="doctor")
+	private long doctorID = 0;
+	@Column(name = "bill")
+	private float bill = (float)0.00;
 	@Column(name = "diagnosis")
 	private String diagnosis = "None";
 	@Column(name = "prescription")
@@ -77,6 +80,22 @@ public class Patient {
 		this.password = password;
 	}
 
+	public float getBill(){
+		return bill;
+	}
+	public void incBill(float amt){
+		bill += amt;
+	}
+	public void decBill(float amt){
+		bill -= amt;
+	}
+
+	public long getdoctorId() {
+		return doctorID;
+	}
+	public void setdoctorId(long id) {
+		this.doctorID = id;
+	}
 
 	public void setDiagnosis(String diagnosis) {
 		this.diagnosis = diagnosis;

@@ -29,10 +29,14 @@ public class Patient {
     @Column(name = "role")
 	private String role = "ROLE_USER";
 
+	@Column(name="doctor")
+	private long doctorID = 0;
 	@Column(name = "diagnosis")
 	private String diagnosis = "None";
 	@Column(name = "prescription")
 	private String prescription = "None";
+	@Column(name = "bill")
+	private float bill = (float)0.00;
 
 
 	public long getId() {
@@ -89,5 +93,22 @@ public class Patient {
 	}
 	public String getPrescription() {
 		return prescription;
+	}
+
+	public float getBill(){
+		return bill;
+	}
+	public void incBill(float amt){
+		bill += amt;
+	}
+	public void decBill(float amt){
+		bill -= amt;
+	}
+
+	public long getdoctorId() {
+		return doctorID;
+	}
+	public void setdoctorId(long id) {
+		this.doctorID = id;
 	}
 }

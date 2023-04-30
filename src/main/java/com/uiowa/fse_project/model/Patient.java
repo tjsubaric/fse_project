@@ -37,7 +37,6 @@ public class Patient {
 	@Column(name = "prescription")
 	private String prescription = "None";
 
-
 	public long getId() {
 		return id;
 	}

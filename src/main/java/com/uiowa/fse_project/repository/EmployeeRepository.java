@@ -8,5 +8,5 @@ import com.uiowa.fse_project.model.Employee;
 public interface EmployeeRepository extends JpaRepository <Employee, Long>{
     Optional<Employee> findById(long id);
 
-    public Employee findByEmail(String email);
+    Employee findByEmail(String email);
 }

@@ -36,6 +36,7 @@ public class EmployeeController {
 		return "employee/mypatients";
 	}
 
+	@GetMapping
 	public String showPatientBoard(Model model, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "firstName") String sortField, 
 	@RequestParam(defaultValue = "asc") String sortDir) {
 		int pageSize = 5;

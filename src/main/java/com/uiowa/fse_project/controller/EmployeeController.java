@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.uiowa.fse_project.model.Patient;
+import com.uiowa.fse_project.model.Employee;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.uiowa.fse_project.service.EmployeeService;
 import org.springframework.data.domain.Page;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import java.security.Principal;
+import com.uiowa.fse_project.repository.EmployeeRepository;
 
 @Controller
 @RequestMapping("/employee")
@@ -20,6 +23,16 @@ public class EmployeeController {
 
 	@Autowired
     private EmployeeService employeeService;
+
+	@Autowired
+	private EmployeeRepository employeeRepo;
+
+	@ModelAttribute
+	private void userDetails(Model m, Principal p) {
+		String email = p.getName();
+		Employee user = employeeRepo.findByEmail(email);
+		m.addAttribute("employee", user);
+	}
 
 	@GetMapping("/")
 	public String home() {
@@ -31,16 +44,11 @@ public class EmployeeController {
 		return "employee/schedule";
 	}
 
-	@GetMapping("/mypatients")
-	public String showMyPatients(){
-		return "employee/mypatients";
-	}
-
-	@GetMapping
+	@GetMapping("/mypatients/{id}")
 	public String showPatientBoard(Model model, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "firstName") String sortField, 
-	@RequestParam(defaultValue = "asc") String sortDir) {
+	@RequestParam(defaultValue = "asc") String sortDir, @PathVariable(value = "id") long id) {
 		int pageSize = 5;
-		long docID = 1;
+		long docID = id;
 		Page<Patient> page = employeeService.findMyPatientsPaginated(pageNo, pageSize, sortField, sortDir);
 		List<Patient> patients = page.getContent();
 		ArrayList<Patient> myPatients = new ArrayList<Patient>();

@@ -36,7 +36,7 @@ public class Patient {
 	@Column(name = "prescription")
 	private String prescription = "None";
 	@Column(name = "bill")
-	private float bill = (float)0.00;
+	private long bill = (long)0.00;
 
 
 	public long getId() {
@@ -95,13 +95,13 @@ public class Patient {
 		return prescription;
 	}
 
-	public float getBill(){
+	public long getBill(){
 		return bill;
 	}
-	public void incBill(float amt){
+	public void incBill(long amt){
 		bill += amt;
 	}
-	public void decBill(float amt){
+	public void decBill(long amt){
 		bill -= amt;
 	}
 

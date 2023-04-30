@@ -3,13 +3,28 @@
 	th:replace="employee_dash::layout(~{::section})">
 <head>
 <meta charset="ISO-8859-1">
-<title>My Schedule Page</title>
-
+<title>Billing</title>
 </head>
 <body>
 	<section>
-		<h1>Billing Page</h1>
-		<a th:href="@{/employee/mypatients}">Back to My Patients</a>
+		<div class="container my-2">
+			<h1>Issuing Bill for: </h1>
+			<h4 th:text="${patient.firstName}"></h4>
+			<h4 th:text="${patient.lastName}"></h4>
+
+			<form action="/employee/mypatients/billPatient" th:object="${patient}" method="POST">
+				<input type="hidden" th:field="*{id}" />
+				<input type="hidden" th:field="*{email}" />
+				<input type="hidden" th:field="*{firstName}" />
+				<input type="hidden" th:field="*{lastName}" />
+				<input type="hidden" th:field="*{password}" />
+
+				<input type="number" th:field="*{bill}" placeholder="bill" class="form-control mb-4 col-4">
+
+				<button type="submit" id="submitButton" class="btn btn-info col-2"> Bill Patient</button>
+			</form>
+			<a th:href="@{/employee/mypatients}">Back to My Patients</a>
+		</div>
 	</section>
 </body>
 </html>

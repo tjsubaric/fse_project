@@ -50,15 +50,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
     
     @Override
-    public void issueBill(long id, float amount){
-        Optional<Patient> optional = patientRepository.findById(id);
-        Patient patient = null;
+    public void issueBill(Patient patient){
+        Optional<Patient> optional = patientRepository.findById(patient.getId());
+        Patient patientNew = null;
 		if (optional.isPresent()) {
-			patient = optional.get();
+			patientNew = optional.get();
 		} else {
-			throw new RuntimeException(" Patient not found for id :: " + id);
+			throw new RuntimeException(" Patient not found for id :: " + patient.getId());
 		}
-        patient.incBill(amount);
+        patientNew.incBill(patient.getBill());
+		patientRepository.save(patientNew);
     }
 
     @Override

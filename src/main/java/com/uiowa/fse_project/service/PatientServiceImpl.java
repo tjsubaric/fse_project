@@ -33,7 +33,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
 	@Override
-	public void payBill(long id, float amount){
+	public void payBill(long id, long amount){
 		Optional<Patient> optPat = patientRepository.findById(id);
         Patient patient = null;
 		if (optPat.isPresent()) {

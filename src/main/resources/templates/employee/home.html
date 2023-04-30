@@ -9,6 +9,9 @@
 <body>
 	<section>
 		<h1>Employee Home Page</h1>
+		<th:block th:each="appointment : ${appointments}">
+			<p th:text="${appointment.appointmentdate}"></p>
+		</th:block>
 	</section>
 </body>
 </html>

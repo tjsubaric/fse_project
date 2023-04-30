@@ -1,5 +1,6 @@
 package com.uiowa.fse_project.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -12,7 +13,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "patients")
 public class Patient {
-	
 	@Id
 	@GeneratedValue(strategy =  GenerationType.IDENTITY)
 	private long id;
@@ -41,7 +41,7 @@ public class Patient {
 	private LocalDateTime appointmentdate = LocalDateTime.now();
 
 	@Column (name = "appointmentTIME")
-	private LocalDateTime appointmenttime = LocalDateTime.now();
+	private LocalDateTime appointmenttime = LocalDateTime.now().withNano(0);
 
 	@Column(name = "doctor")
 	private String doctor = "None";

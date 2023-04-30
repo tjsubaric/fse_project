@@ -21,10 +21,14 @@ import com.uiowa.fse_project.model.Patient;
 import com.uiowa.fse_project.model.Employee;
 import com.uiowa.fse_project.repository.EmployeeRepository;
 import com.uiowa.fse_project.repository.PatientRepository;
-
+import com.uiowa.fse_project.repository.AppointmentRepository;
+import com.uiowa.fse_project.model.Appointments;
 @Controller
 @RequestMapping("/patient")
 public class PatientController {
+
+	@Autowired
+	private AppointmentRepository appointmentRepository;
 
 	@Autowired
 	private PatientRepository patientrepo;
@@ -37,7 +41,6 @@ public class PatientController {
 		String email = p.getName();
 		Patient patient = patientrepo.findByEmail(email);
 		m.addAttribute("patient", patient);
-
 	}
 
 	@GetMapping("/")
@@ -58,7 +61,13 @@ public class PatientController {
 		Optional<Employee> doctor = employeeRepository.findById(doctorName);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		LocalDateTime appointmentDateTime = LocalDateTime.parse(appointmentDate, formatter);
-
+		Appointments appointment = new Appointments();
+		appointment.setFirstName(patient.getFirstName());
+		appointment.setLastName(patient.getLastName());
+		appointment.setDoctor(doctor.get().getFirstName() + " " + doctor.get().getLastName());
+		appointment.setAppointmentdate(appointmentDateTime);
+		appointmentRepository.save(appointment);
+		
 		patient.setDoctor(doctor.get().getFirstName() + " " + doctor.get().getLastName());
 		patient.setAppointmentdate(appointmentDateTime);
 		patientrepo.save(patient);

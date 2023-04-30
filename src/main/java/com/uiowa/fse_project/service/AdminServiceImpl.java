@@ -32,9 +32,6 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private PatientRepository patientRepository;
 
-	@Autowired
-    //private AppointmentRepository appointmentRepository;
-
 	@Override
 	public List<Admin> getAllAdmins() {
 		return adminRepository.findAll();

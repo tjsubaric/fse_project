@@ -6,7 +6,7 @@ public interface EmployeeService {
 
     void giveDiagnosis(Patient patient);
     void givePrescription(Patient patient);
-    void issueBill(long id, float amount);
+    void issueBill(Patient patient);
     Patient getMyPatientById(long id);
     void dischargePatient(Patient patient);
     Page<Patient> findMyPatientsPaginated(int pageNo, int pageSize, String sortField, String sortDirection);

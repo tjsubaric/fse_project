@@ -109,4 +109,10 @@ public class EmployeeController {
 		return "employee/bill";
 	}
 
+	@PostMapping("/mypatients/billPatient")
+	public String billPatient(@ModelAttribute("patient") Patient patient) {
+		employeeService.issueBill(patient);
+		return "redirect:/employee/mypatients";
+	}
+
 }

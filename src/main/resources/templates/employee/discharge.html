@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="employee_dash::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>My Schedule Page</title>
+
+</head>
+<body>
+	<section>
+		<div class="container my-2">
+			<h1>You are about to discharge this patient:</h1>
+			<h4 th:text="${patient.firstName}"></h4>
+			<h4 th:text="${patient.lastName}"></h4>
+			<h4>Continue?</h4>
+			<a th:href="@{/employee/mypatients/dischargePatient/{id}(id=${patient.id})}" class="btn btn-success">Yes</a>
+			<a th:href="@{/employee/mypatients}" class="btn btn-danger">No</a>
+		<a th:href="@{/employee/mypatients}">Back to My Patients</a>
+	</section>
+</body>
+</html>

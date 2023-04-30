@@ -5,13 +5,9 @@ import com.uiowa.fse_project.repository.PatientRepository;
 import java.util.Optional;
 import com.uiowa.fse_project.model.Patient;
 import com.uiowa.fse_project.model.Employee;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.uiowa.fse_project.model.Patient;
-import com.uiowa.fse_project.repository.PatientRepository;
 
 @Service
 public class PatientServiceImpl implements PatientService {
@@ -70,5 +66,4 @@ public class PatientServiceImpl implements PatientService {
 		}
 		patient.decBill(amount);
 	}
-
 }

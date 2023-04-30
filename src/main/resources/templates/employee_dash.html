@@ -26,7 +26,7 @@
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="/employee/">Home</a></li>
 					<li class="nav-item"><a class="nav-link" href="/employee/schedule">My Schedule</a></li>
-					<li class="nav-item"><a class="nav-link" href="/employee/mypatients">My Patients</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/employee/mypatients/{id}(id=${employee.id})}">My Patients</a></li>
                     <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
 				</ul>
 

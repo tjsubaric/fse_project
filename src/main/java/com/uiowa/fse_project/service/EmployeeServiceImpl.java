@@ -1,7 +1,6 @@
 package com.uiowa.fse_project.service;
 
 import java.util.Optional;
-
 import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +16,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	private PatientRepository patientRepository;
 
+	@Override
     public void giveDiagnosis(Patient patient){
 		Optional<Patient> optional = patientRepository.findById(patient.getId());
         Patient patientNew = null;
@@ -48,7 +48,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		patientRepository.save(patient);
 		//If any schedule cancelling needs to happen, it goes here
 	}
-
+    
     @Override
     public void issueBill(Patient patient){
         Optional<Patient> optional = patientRepository.findById(patient.getId());
@@ -62,7 +62,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 		patientRepository.save(patientNew);
     }
 
-
     @Override
 	public Patient getMyPatientById(long id){
 		Optional<Patient> optional = patientRepository.findById(id);
@@ -75,6 +74,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return patient;
 	}
 
+	@Override
     public Page<Patient> findMyPatientsPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
 		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
 			Sort.by(sortField).descending();
@@ -82,5 +82,4 @@ public class EmployeeServiceImpl implements EmployeeService {
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
 		return this.patientRepository.findAll(pageable);
 	}
-    
 }

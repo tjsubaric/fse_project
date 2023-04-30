@@ -22,8 +22,8 @@ import com.uiowa.fse_project.model.Admin;
 import com.uiowa.fse_project.model.Employee;
 import com.uiowa.fse_project.model.Patient;
 import com.uiowa.fse_project.model.UserDtls;
-import com.uiowa.fse_project.repository.EmployeeRepository;
-import com.uiowa.fse_project.repository.PatientRepository;
+//import com.uiowa.fse_project.repository.EmployeeRepository;
+//import com.uiowa.fse_project.repository.PatientRepository;
 import com.uiowa.fse_project.service.AdminService;
 import com.uiowa.fse_project.service.UserService;
 

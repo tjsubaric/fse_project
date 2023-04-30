@@ -15,6 +15,8 @@ public interface AdminService {
 	Admin getAdminById(long id);
 	void deleteAdminById(long id);
 	Page<Admin> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
+    Admin getAdminByEmail(String email);
+
 
 	// all update Employee methods
 	List<Employee> getAllEmployees();
@@ -22,6 +24,7 @@ public interface AdminService {
     Employee getEmployeeById(long id);
     void deleteEmployeeById(long id);
     Page<Employee> findEmployeePaginated(int pageNo, int pageSize, String sortField, String sortDirection);
+    Employee getEmployeeByEmail(String email);
 
 	// all update Patient methods
 	List<Patient> getAllPatients();
@@ -29,6 +32,7 @@ public interface AdminService {
     Patient getPatientById(long id);
     void deletePatientById(long id);
     Page<Patient> findPatientPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
+    Patient getPatientByEmail(String email);
     //Appointment createAppointment(Appointment appointment);
 
 }

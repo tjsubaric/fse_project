@@ -33,6 +33,21 @@ public class AdminServiceImpl implements AdminService {
 	private PatientRepository patientRepository;
 
 	@Override
+	public Admin getAdminByEmail(String email) {
+		return adminRepository.findByEmail(email);
+	}
+
+	@Override
+	public Employee getEmployeeByEmail(String email) {
+		return employeeRepository.findByEmail(email);
+	}
+
+	@Override
+	public Patient getPatientByEmail(String email) {
+		return patientRepository.findByEmail(email);
+	}
+
+	@Override
 	public List<Admin> getAllAdmins() {
 		return adminRepository.findAll();
 	}

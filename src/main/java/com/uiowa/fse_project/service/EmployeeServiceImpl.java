@@ -2,6 +2,8 @@ package com.uiowa.fse_project.service;
 
 import java.util.Optional;
 import org.springframework.data.domain.Page;
+
+import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.PageRequest;
@@ -16,7 +18,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	private PatientRepository patientRepository;
 
-    @Override
     public void giveDiagnosis(Patient patient){
 		Optional<Patient> optional = patientRepository.findById(patient.getId());
         Patient patientNew = null;
@@ -41,7 +42,46 @@ public class EmployeeServiceImpl implements EmployeeService {
 		patientNew.setPrescription(patient.getPrescription());
         this.patientRepository.save(patientNew);
     }
+
+	@Override
+	public void dischargePatient(Patient patient){
+		patient.setdoctorId(0);
+		patientRepository.save(patient);
+		//If any schedule cancelling needs to happen, it goes here
+	}
+
+    @Override
+    public void giveDiagnosis(Patient patient){
+		Optional<Patient> optional = patientRepository.findById(patient.getId());
+        Patient patientNew = null;
+    public void issueBill(long id, float amount){
+        Optional<Patient> optional = patientRepository.findById(id);
+        Patient patient = null;
+		if (optional.isPresent()) {
+			patientNew = optional.get();
+		} else {
+			throw new RuntimeException(" Patient not found for id :: " + patient.getId());
+		}
+		patientNew.setDiagnosis(patient.getDiagnosis());
+        this.patientRepository.save(patientNew);
+        patient.incBill(amount);
+    }
+
+
+    @Override
+    public void givePrescription(Patient patient){
+		Optional<Patient> optional = patientRepository.findById(patient.getId());
+        Patient patientNew = null;
+		if (optional.isPresent()) {
+			patientNew = optional.get();
+		} else {
+			throw new RuntimeException(" Patient not found for id :: " + patient.getId());
+		}
+		patientNew.setPrescription(patient.getPrescription());
+        this.patientRepository.save(patientNew);
+    }
 	
+
 	@Override
 	public void dischargePatient(Patient patient){
 		patient.setdoctorId(0);
@@ -63,15 +103,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-	public Page<Patient> findMyPatientsPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
-		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
-			Sort.by(sortField).descending();
-		
-		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
-		return this.patientRepository.findAll(pageable);
-	}
-
-	@Override
 	public Patient getMyPatientById(long id){
 		Optional<Patient> optional = patientRepository.findById(id);
 		Patient patient = null;
@@ -80,6 +111,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 		} else {
 			throw new RuntimeException(" Patient not found for id :: " + id);
 		}
+		return patient;
+	}
+
+    public Page<Patient> findMyPatientsPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+			Sort.by(sortField).descending();
+
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+		return this.patientRepository.findAll(pageable);
+	}
+    
 		return patient;
 	}
 }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="patient_dash::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Patient Home</title>
+
+</head>
+<body>
+    <section>
+        <div class="container my-2">
+            <h1>Make Payment</h1>
+            <form action="/patient/payBill" th:object="${p}" method="POST">
+				<input type="hidden" th:field="*{id}" />
+				<input type="hidden" th:field="*{email}" />
+				<input type="hidden" th:field="*{firstName}" />
+				<input type="hidden" th:field="*{lastName}" />
+				<input type="hidden" th:field="*{password}" />
+
+                <h6>Credit Card:</h6>
+				<input type="number"  class="form-control mb-4 col-4">
+                <h6>CVV:</h6>
+				<input type="number"  class="form-control mb-4 col-4">
+                <h6>Exp Year:</h6>
+				<input type="number"  class="form-control mb-4 col-4">
+                <h6>Exp Month:</h6>
+				<input type="number"  class="form-control mb-4 col-4">
+                <h6>Payment Amount:</h6>
+				<input type="number" th:field="*{bill}" placeholder="Amount" class="form-control mb-4 col-4">
+
+				<button type="submit" id="submitButton" class="btn btn-info col-2"> Make Payment</button>
+			</form>
+        </div>
+    </section>
+</body>
+</html>

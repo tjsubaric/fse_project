@@ -81,7 +81,7 @@ public class EmployeeController {
 	@PostMapping("/mypatients/prescribePatient")
 	public String prescribePatient(@ModelAttribute("patient") Patient patient) {
 		employeeService.givePrescription(patient);
-		return "redirect:/employee/mypatients";
+		return "redirect:/employee/";
 	}
 
 	@GetMapping("/mypatients/diagnosis/{id}")
@@ -94,7 +94,7 @@ public class EmployeeController {
 	@PostMapping("/mypatients/diagnosePatient")
 	public String diagnosePatient(@ModelAttribute("patient") Patient patient) {
 		employeeService.giveDiagnosis(patient);
-		return "redirect:/employee/mypatients";
+		return "redirect:/employee/";
 	}
 
 	@GetMapping("/mypatients/discharge/{id}")
@@ -108,7 +108,7 @@ public class EmployeeController {
 	public String dischargeMyPatient(@PathVariable (value = "id") long id) {
 		Patient patient = employeeService.getMyPatientById(id);
 		employeeService.dischargePatient(patient);
-		return "redirect:/employee/mypatients";
+		return "redirect:/employee/";
 	}
 
 	@GetMapping("/mypatients/bill/{id}")
@@ -121,6 +121,6 @@ public class EmployeeController {
 	@PostMapping("/mypatients/billPatient")
 	public String billPatient(@ModelAttribute("patient") Patient patient) {
 		employeeService.issueBill(patient);
-		return "redirect:/employee/mypatients";
+		return "redirect:/employee/";
 	}
 }

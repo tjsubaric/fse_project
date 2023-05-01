@@ -9,5 +9,5 @@ public interface PatientService {
 	public boolean checkEmail(String email);
 
     void selectDoctor(long patientID, long doctorID);
-    void payBill(long id, float amount);
+    void payBill(Patient patient);
 }

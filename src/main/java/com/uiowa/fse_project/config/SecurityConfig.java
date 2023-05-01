@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**").permitAll()
             )
             .formLogin(formLogin -> formLogin
-                .loginPage("/signin")
+                .loginPage("/login")
                 .usernameParameter("email") // set email as the parameter for username
                 .passwordParameter("password") // set password as the parameter for password
                 .loginProcessingUrl("/login")

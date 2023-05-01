@@ -56,14 +56,15 @@ public class PatientServiceImpl implements PatientService {
     }
 
 	@Override
-	public void payBill(long id, float amount){
-		Optional<Patient> optPat = patientRepository.findById(id);
-        Patient patient = null;
-		if (optPat.isPresent()) {
-			patient = optPat.get();
+	public void payBill(Patient patient){
+		Optional<Patient> optional = patientRepository.findById(patient.getId());
+        Patient p = null;
+		if (optional.isPresent()) {
+			p = optional.get();
 		} else {
-			throw new RuntimeException(" Patient not found for id :: " + id);
+			throw new RuntimeException(" Patient not found for id :: " + patient.getId());
 		}
-		patient.decBill(amount);
+		p.decBill(patient.getBill());
+		patientRepository.save(p);
 	}
 }

@@ -91,9 +91,9 @@ body{
 
 .wrapper{
 	position : absolute !important;
-	top: 8%   !important;
-	left: 3% !important;
-	transform: translate(-8%,-3%) !important;
+	top: 2%   !important;
+	left: 1% !important;
+	transform: translate(-2%,-1%) !important;
 	width: 600px !important;
 height: 250px;
 	display: flex !important;
@@ -128,45 +128,20 @@ border-bottom: 1px solid #070707;
 
 .wrapper2 .right .info h3{
 	border-bottom: 1px solid #070707;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+.wrapper2 .right .info h5{
+	margin-top: 10px;
+	margin-left: 10px;
 }
 
 .wrapper2{
 	position : absolute !important;
-	top: 40%   !important;
-	left: 14% !important;
-	transform: translate(-40%,-14%) !important;
-	width: 600px !important;
-height: 250px;
-	display: flex !important;
-	box-shadow: 0 1px 20px 0 rgba(44, 42, 177, 0.08)!important;
-font-family: 'Josefin Sans', sans-serif ;
-}
-
-.wrapper3 .right .info h3{
-	border-bottom: 1px solid #070707;
-}
-
-.wrapper3{
-	position : absolute !important;
-	top: 55%   !important;
-	left: 18.5% !important;
-	transform: translate(-55%,-18.5%) !important;
-	width: 600px !important;
-height: 250px;
-	display: flex !important;
-	box-shadow: 0 1px 20px 0 rgba(44, 42, 177, 0.08)!important;
-font-family: 'Josefin Sans', sans-serif ;
-}
-
-.wrapper4 .right .info h3{
-	border-bottom: 1px solid #070707;
-}
-
-.wrapper4{
-	position : absolute !important;
-	top: 65%   !important;
-	left: 21.5% !important;
-	transform: translate(-65%,-21.5%) !important;
+	top: 30%   !important;
+	left: 12% !important;
+	transform: translate(-37%,-12%) !important;
 	width: 600px !important;
 height: 250px;
 	display: flex !important;

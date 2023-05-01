@@ -32,10 +32,10 @@ public class Patient {
 	private String role = "ROLE_USER";
 
 	@Column(name = "diagnosis")
-	private String diagnosis = "None";
+	public String diagnosis = "None";
 	
 	@Column(name = "prescription")
-	private String prescription = "None";
+	public String prescription = "None";
 
 	@Column (name = "appointmentDATE")
 	private LocalDateTime appointmentdate = LocalDateTime.now();

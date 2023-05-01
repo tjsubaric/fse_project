@@ -55,6 +55,11 @@ public class PatientController {
 		return "patient/appointments";
 	}
 
+	@GetMapping("/records")
+	public String showRecords(){
+		return "patient/records";
+	}
+
 	@PostMapping("/appointments")
 	public String bookAppointment(@ModelAttribute("patient") Patient patient, @RequestParam("appointmentDate") String appointmentDate, @RequestParam("doctorName") long doctorName) {
     // Your code to save the appointmentDateTime to the database

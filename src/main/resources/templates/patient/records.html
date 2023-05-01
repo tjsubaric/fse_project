@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="patient_dash::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Patient Home</title>
+
+</head>
+<body> 
+    <section>
+        <div class = "wrapper2">
+            <div class = "right">
+                <div class = "info">
+                    <h3>Diagnosis:</h3>
+                    <div class = "info_data">
+                        <div class = "data">
+                            <h5>Doctor: [[${patient.doctor}]]</h5>
+                            <h5 th:text = "${patient.diagnosis}"></h5>
+                        </div>
+                    </div>
+                    <h3> Billing Summary:</h3>
+                    <div class = "info_data">
+                        <div class = "data">
+                            <h5>Balance: $1000.00</h5>
+                        </div>
+                    </div>
+                    <h3> Prescriptions:</h3>
+                    <div class = "info_data">
+                        <div class = "data">
+                            <h5 th:text = "${patient.prescription}"></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

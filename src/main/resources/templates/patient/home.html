@@ -37,7 +37,7 @@
 						<div class = "info_data">
 							<div class = "data">
 								<h5>Doctor: [[${patient.doctor}]]</h5>
-								<h5>Date: [[${patient.appointmentdate}]]</h5>
+								<h5 th:text = "${patient.appointmentdate +''}"></h5>
 							</div>
 						</div>
 					</div>

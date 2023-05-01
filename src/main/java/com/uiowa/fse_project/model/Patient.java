@@ -1,5 +1,7 @@
 package com.uiowa.fse_project.model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,6 +38,10 @@ public class Patient {
 	private String diagnosis = "None";
 	@Column(name = "prescription")
 	private String prescription = "None";
+	@Column (name = "appointmentDATE")
+	private LocalDateTime appointmentdate = LocalDateTime.now();
+	@Column(name = "doctorN")
+	private String doctorN = "None";
 
 	public long getId() {
 		return id;
@@ -110,5 +116,21 @@ public class Patient {
 	}
 	public String getPrescription() {
 		return prescription;
+	}
+
+	public String getDoctor() {
+		return doctorN;
+	}
+	
+	public void setDoctor(String doctor) {
+		this.doctorN = doctor;
+	}
+
+	public LocalDateTime getAppointmentdate() {
+		return appointmentdate;
+	}
+	
+	public void setAppointmentdate(LocalDateTime appointmentDateTime) {
+		this.appointmentdate = appointmentDateTime;
 	}
 }

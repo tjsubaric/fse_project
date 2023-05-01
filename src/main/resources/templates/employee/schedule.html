@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-	th:replace="employee_dash::layout(~{::section})">
+    th:replace="employee_dash::layout(~{::section})">
 <head>
-<meta charset="ISO-8859-1">
-<title>My Schedule Page</title>
-
+    <meta charset="UTF-8">
+    <title>Employee Home</title>
 </head>
 <body>
-	<section>
-		<h1>My Schedule Page</h1>
-	</section>
+    <section>
+        <h1>Employee Home Page</h1>
+		<select class="form-control" name = "appointmenttable">
+			<option value="">-- Select Doctor --</option>
+			<th:block th:each="appointment : ${appointments}">
+			  <option th:value="${appointment.id}" th:text="${appointment.appointmentdate + ' ' + appointment.doctor}"></option>
+			</th:block>
+		</select>
+    </section>
 </body>
 </html>

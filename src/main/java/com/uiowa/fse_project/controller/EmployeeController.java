@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.uiowa.fse_project.model.Patient;
+import com.uiowa.fse_project.model.Appointments;
 import com.uiowa.fse_project.model.Employee;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.uiowa.fse_project.service.EmployeeService;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import java.security.Principal;
+
+import com.uiowa.fse_project.repository.AppointmentRepository;
 import com.uiowa.fse_project.repository.EmployeeRepository;
 
 @Controller
@@ -26,6 +29,9 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeRepository employeeRepo;
+	
+	@Autowired
+	private AppointmentRepository appointmentRepository;
 
 	@ModelAttribute
 	private void userDetails(Model m, Principal p) {
@@ -37,11 +43,6 @@ public class EmployeeController {
 	@GetMapping("/")
 	public String home() {
 		return "employee/home";
-	}
-
-	@GetMapping("/schedule")
-	public String showEmployeeSchedule(){
-		return "employee/schedule";
 	}
 
 	@GetMapping("/mypatients/{id}")
@@ -122,5 +123,13 @@ public class EmployeeController {
 	public String billPatient(@ModelAttribute("patient") Patient patient) {
 		employeeService.issueBill(patient);
 		return "redirect:/employee/";
+	}
+
+	@GetMapping("/schedule")
+	public String showAppointments(Model model, @ModelAttribute("employee") Employee employee) {
+		String doctorFullName = employee.getFirstName() + " " + employee.getLastName();	
+		List<Appointments> appointments = appointmentRepository.findByDoctorName(doctorFullName);
+		model.addAttribute("appointments", appointments);
+		return "employee/schedule";
 	}
 }

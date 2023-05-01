@@ -1,10 +1,14 @@
-// package com.uiowa.fse_project.repository;
+package com.uiowa.fse_project.repository;
+import java.util.List;
 
-// import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
-// import org.springframework.data.jpa.repository.JpaRepository;
-// import com.uiowa.fse_project.model.Appointment;
+import com.uiowa.fse_project.model.Appointments;
 
-// public interface AppointmentRepository extends JpaRepository <Appointment, Long>{
-//     Optional<Appointment> findById(long id);
-// }
+
+public interface AppointmentRepository extends JpaRepository<Appointments, Long>{
+    @Query("SELECT a FROM Appointments a WHERE a.doctor = :doctorName")
+    List<Appointments> findByDoctorName(@Param("doctorName") String doctorName);
+}

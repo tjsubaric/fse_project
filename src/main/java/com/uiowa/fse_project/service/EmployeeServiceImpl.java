@@ -58,7 +58,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		} else {
 			throw new RuntimeException(" Patient not found for id :: " + patient.getId());
 		}
-        patientNew.incBill(patient.getBill());
+        patientNew.setBill(patient.getBill());
 		patientRepository.save(patientNew);
     }
 

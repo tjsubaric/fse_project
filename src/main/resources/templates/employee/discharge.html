@@ -14,8 +14,8 @@
 			<h4 th:text="${patient.lastName}"></h4>
 			<h4>Continue?</h4>
 			<a th:href="@{/employee/mypatients/dischargePatient/{id}(id=${patient.id})}" class="btn btn-success">Yes</a>
-			<a th:href="@{/employee/mypatients}" class="btn btn-danger">No</a>
-		<a th:href="@{/employee/mypatients}">Back to My Patients</a>
+			<a th:href="@{/employee/mypatients/{id}(id=${employee.id})}" class="btn btn-danger">No</a>
+		<a th:href="@{/employee/mypatients/{id}(id=${employee.id})}">Back to My Patients</a>
 	</section>
 </body>
 </html>

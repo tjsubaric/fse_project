@@ -23,7 +23,7 @@
 
 				<button type="submit" id="submitButton" class="btn btn-info col-2"> Prescribe Patient</button>
 			</form>
-			<a th:href="@{/employee/mypatients}">Back to My Patients</a>
+			<a th:href="@{/employee/mypatients/{id}(id=${employee.id})}">Back to My Patients</a>
 		</div>
 	</section>
 </body>

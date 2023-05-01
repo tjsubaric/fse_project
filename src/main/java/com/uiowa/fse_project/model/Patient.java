@@ -31,7 +31,7 @@ public class Patient {
 	@Column(name="doctor")
 	private long doctorID = 0;
 	@Column(name = "bill")
-	private float bill = (float)0.00;
+	private double bill = 0.00;
 	@Column(name = "diagnosis")
 	private String diagnosis = "None";
 	@Column(name = "prescription")
@@ -79,14 +79,17 @@ public class Patient {
 		this.password = password;
 	}
 
-	public float getBill(){
+	public double getBill(){
 		return bill;
 	}
-	public void incBill(float amt){
-		bill += amt;
+	public void setBill(double amt){
+		this.bill += amt;
 	}
-	public void decBill(float amt){
-		bill -= amt;
+	public void incBill(double amt){
+		this.bill += amt;
+	}
+	public void decBill(double amt){
+		this.bill -= amt;
 	}
 
 	public long getdoctorId() {

@@ -42,7 +42,7 @@ public class EmployeeController {
 
 	@GetMapping("/")
 	public String home() {
-		return "employee/home";
+		return "employee/schedule";
 	}
 
 	@GetMapping("/mypatients/{id}")

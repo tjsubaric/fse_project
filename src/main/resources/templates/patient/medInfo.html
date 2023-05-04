@@ -8,14 +8,16 @@
 </head>
 <body>
     <section>
-        <div class="container my-2">
-            <h1>Medical Records</h1>
-            <h3>Current Doctor:</h3>
-            <h5 th:text="${patientuser.getdoctorId()}"></h5>
-            <h3>Current Diagnosis:</h3>
-            <h5 th:text="${patientuser.getDiagnosis()}"></h5>
-            <h3>Current Prescription:</h3>
-            <h5 th:text="${patientuser.getPrescription()}"></h5>
+        <div class = "home-inner">
+            <div class="container my-2">
+                <h1>Medical Records</h1>
+                <h3>Current Doctor:</h3>
+                <h5 th:text="${patientuser.getDoctor()} + ' ID:' + ${patientuser.getdoctorId}"></h5>
+                <h3>Current Diagnosis:</h3>
+                <h5 th:text="${patientuser.getDiagnosis()}"></h5>
+                <h3>Current Prescription:</h3>
+                <h5 th:text="${patientuser.getPrescription()}"></h5>
+            </div>
         </div>
     </section>
 </body>

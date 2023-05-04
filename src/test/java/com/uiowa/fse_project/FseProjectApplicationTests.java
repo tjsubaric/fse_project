@@ -18,7 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.uiowa.fse_project.controller.AdminController;
 import com.uiowa.fse_project.controller.EmployeeController;
 import com.uiowa.fse_project.model.Admin;
-import com.uiowa.fse_project.model.Employee;7
+import com.uiowa.fse_project.model.Employee;
 import com.uiowa.fse_project.model.Patient;
 import com.uiowa.fse_project.model.UserDtls;
 import com.uiowa.fse_project.repository.PatientRepository;

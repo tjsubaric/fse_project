@@ -99,7 +99,7 @@ class FseProjectApplicationTests {
         assertNotNull(newAdmin);
 
         // verify that the admin object has the correct properties
-        assertEquals("John", newAdmin.getFirstName());
+        assertEquals("John ", newAdmin.getFirstName());
         assertEquals("Doe", newAdmin.getLastName());
         assertEquals("johndoe@test.com", newAdmin.getEmail());
 

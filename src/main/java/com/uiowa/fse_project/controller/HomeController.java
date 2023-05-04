@@ -1,5 +1,7 @@
 package com.uiowa.fse_project.controller;
 
+import java.util.function.BooleanSupplier;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;

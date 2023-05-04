@@ -1,9 +1,6 @@
 package com.uiowa.fse_project.controller;
-
 import java.util.List;
-
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,17 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.uiowa.fse_project.model.Admin;
-//import com.uiowa.fse_project.model.Appointment;
 import com.uiowa.fse_project.model.Employee;
 import com.uiowa.fse_project.model.Patient;
 import com.uiowa.fse_project.model.UserDtls;
-//import com.uiowa.fse_project.repository.EmployeeRepository;
-//import com.uiowa.fse_project.repository.PatientRepository;
 import com.uiowa.fse_project.service.AdminService;
 import com.uiowa.fse_project.service.UserService;
 
@@ -36,13 +28,6 @@ public class AdminController {
 
 	@Autowired
 	private UserService userService;
-
-	// @Autowired
-	// private  PatientRepository patientRepository;
-
-	// @Autowired
-	// private  EmployeeRepository employeeRepository;
-
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncode;
@@ -101,16 +86,6 @@ public class AdminController {
 		return "admin/patient_board";
 	}
 
-	// @GetMapping("/create_appointment")
-	// public String showNewAppointmentForm(Model model) {
-	// 	List<Employee> employees = employeeRepository.findAll();
-    // 	List<Patient> patients = patientRepository.findAll();
-    // 	model.addAttribute("employees", employees);
-    // 	model.addAttribute("patients", patients);
-    // 	model.addAttribute("admin", new Admin());
-    // 	return "admin/create_appointment";
-	// }
-
 	@GetMapping("/new_admin")
 	public String showNewAdminForm(Model model) {
 		model.addAttribute("admin", new Admin());
@@ -128,11 +103,6 @@ public class AdminController {
 		model.addAttribute("patient", new Patient());
 		return "admin/new_patient";
 	}
-
-	// @PostMapping("/appointment_board/create_appointment")
-    // public Appointment createAppointment(@RequestBody Appointment appointment) {
-    //     return adminService.createAppointment(appointment);
-    // }
 
     @PostMapping("/saveAdmin")
 	public String saveAdmin(@ModelAttribute UserDtls user, HttpSession session) {
@@ -218,45 +188,6 @@ public class AdminController {
 		return "redirect:/admin/patient_board";
 	}
 
-	@GetMapping("/showFormAdminUpdate/{id}")
-	public String showFormAdminUpdate(@PathVariable ( value = "id") long id, Model model) {
-		Admin admin = adminService.getAdminById(id);
-		model.addAttribute("admin", admin);
-		return "admin/update_admin";
-	}
-
-	@PostMapping("/showFormAdminUpdate/{id}")
-	public String updateAdmin(@PathVariable(value = "id") long id, @ModelAttribute("admin") Admin admin) {
-		adminService.saveAdmin(admin);
-		return "redirect:/admin/";
-	}
-
-	@GetMapping("/employee_board/showFormEmployeeUpdate/{id}")
-	public String showFormEmployeeUpdate(@PathVariable ( value = "id") long id, Model model) {
-		Employee employee = adminService.getEmployeeById(id);
-		model.addAttribute("employee", employee);
-		return "admin/update_employee";
-	}
-
-	@PostMapping("/employee_board/showFormEmployeeUpdate/{id}")
-	public String updateEmployee(@PathVariable(value = "id") long id, @ModelAttribute("admin") Employee employee) {
-		adminService.saveEmployee(employee);
-		return "redirect:/admin/employee_board";
-	}
-
-	@GetMapping("/patient_board/showFormPatientUpdate/{id}")
-	public String showFormPatientUpdate(@PathVariable ( value = "id") long id, Model model) {
-		Patient patient = adminService.getPatientById(id);
-		model.addAttribute("patient", patient);
-		return "admin/update_patient";
-	}
-
-	@PostMapping("/patient_board/showFormPatientUpdate/{id}")
-	public String updatePatient(@PathVariable(value = "id") long id, @ModelAttribute("admin") Patient patient) {
-		adminService.savePatient(patient);
-		return "redirect:/admin/patient_board";
-	}
-	
 	@GetMapping("/deleteAdmin/{id}")
 	public String deleteAdmin(@PathVariable (value = "id") long id) {
 		// call delete employee method 

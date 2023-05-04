@@ -29,7 +29,6 @@
                         <td th:text="${admin.lastName}"></td>
                         <td th:text="${admin.email}"></td>
                         <td>
-                            <a th:href="@{/admin/showFormAdminUpdate/{id}(id=${admin.id})}" class="btn btn-primary">Update</a>
                             <a th:href="@{/admin/deleteAdmin/{id}(id=${admin.id})}" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>

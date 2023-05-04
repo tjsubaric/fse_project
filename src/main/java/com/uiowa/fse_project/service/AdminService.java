@@ -6,6 +6,7 @@ import com.uiowa.fse_project.model.Admin;
 //import com.uiowa.fse_project.model.Appointment;
 import com.uiowa.fse_project.model.Employee;
 import com.uiowa.fse_project.model.Patient;
+import com.uiowa.fse_project.model.UserDtls;
 
 public interface AdminService {
 

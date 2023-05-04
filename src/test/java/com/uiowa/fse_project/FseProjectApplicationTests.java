@@ -3,6 +3,7 @@ package com.uiowa.fse_project;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.transaction.Transactional;
@@ -13,8 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.uiowa.fse_project.controller.AdminController;
+import com.uiowa.fse_project.controller.HomeController;
 import com.uiowa.fse_project.model.Admin;
 import com.uiowa.fse_project.model.Employee;
 import com.uiowa.fse_project.model.Patient;
@@ -76,7 +79,7 @@ class FseProjectApplicationTests {
         assertNotNull(newAdmin);
 
         // verify that the admin object has the correct properties
-        assertEquals("John", newAdmin.getFirstName());
+        assertEquals("John ", newAdmin.getFirstName());
         assertEquals("Doe", newAdmin.getLastName());
         assertEquals("johndoe@test.com", newAdmin.getEmail());
 
@@ -165,5 +168,92 @@ class FseProjectApplicationTests {
 
         // verify that a UserDtls object with the same email does not already exist in the database
         assertTrue(userService.checkEmail("theovon@test.com"));
+    }
+
+    @Test
+    public void testDeleteAdmin() throws Exception {
+        // create a mock HttpSession
+        MockHttpSession session = new MockHttpSession();
+
+        // log in as the existing admin
+        session.setAttribute("admin", existingAdmin);
+
+        // create a UserDtls object with test data
+        UserDtls user = new UserDtls();
+        user.setId(113);
+        user.setFirstName("John");
+        user.setLastName("Doe");
+        user.setEmail("johndoe@test.com");
+        user.setPassword("password");
+
+        // call the saveAdmin method of the AdminController
+        adminController.saveAdmin(user, session);
+
+        // delete the admin account
+        adminController.deleteAdmin(user.getId());
+
+        // verify that the admin object has been deleted from the database
+        assertNull(adminService.getAdminByEmail("johndoe@test.com"));
+
+        // verify that the associated UserDtls object has been deleted from the database
+        //assertFalse(userService.checkEmail("johndoe@test.com"));
+    }
+
+    @Test
+    public void testDeleteEmployee() throws Exception {
+        // create a mock HttpSession
+        MockHttpSession session = new MockHttpSession();
+
+        // log in as the existing admin
+        session.setAttribute("admin", existingAdmin);
+
+        // create a UserDtls object with test data
+        UserDtls user = new UserDtls();
+        user.setId(41);
+        user.setFirstName("doc");
+        user.setLastName("stoopid");
+        user.setEmail("stoopid@gmail.com");
+        user.setPassword("password");
+
+        // call the saveAdmin method of the AdminController
+        adminController.saveEmployee(user, session);
+
+        // delete the admin account
+        adminController.deleteEmployee(user.getId());
+
+        // verify that the admin object has been deleted from the database
+        assertNull(adminService.getEmployeeByEmail("stoopid@gmail.com"));
+
+        // verify that the associated UserDtls object has been deleted from the database
+        //assertFalse(userService.checkEmail("johndoe@test.com"));
+    }
+
+    @Test
+    public void testDeletePatient() throws Exception {
+        // create a mock HttpSession
+        MockHttpSession session = new MockHttpSession();
+
+        // log in as the existing admin
+        session.setAttribute("admin", existingAdmin);
+
+        // create a UserDtls object with test data
+        UserDtls user = new UserDtls();
+        user.setId(44);
+        user.setFirstName("Michael");
+        user.setLastName("Jordan");
+        user.setEmail("mj@gmail.com");
+        user.setPassword("password");
+
+        // call the saveAdmin method of the AdminController
+        adminController.savePatient(user, session);
+
+        // delete the admin account
+        adminController.deletePatient(user.getId());
+
+        // verify that the admin object has been deleted from the database
+        assertNull(adminService.getPatientByEmail("mj@gmail.com"));
+
+        // verify that the associated UserDtls object has been deleted from the database
+        //assertFalse(userService.checkEmail("johndoe@test.com"));
     }
 }

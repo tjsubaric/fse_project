@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.uiowa.fse_project.model.Appointments;
 import com.uiowa.fse_project.model.Employee;
 import com.uiowa.fse_project.model.Patient;
-import com.uiowa.fse_project.model.UserDtls;
-import com.uiowa.fse_project.repository.UserRepository;
 import com.uiowa.fse_project.repository.AppointmentRepository;
 import com.uiowa.fse_project.repository.EmployeeRepository;
 import com.uiowa.fse_project.repository.PatientRepository;
@@ -29,9 +27,6 @@ import com.uiowa.fse_project.service.PatientService;
 @Controller
 @RequestMapping("/patient")
 public class PatientController {
-
-	@Autowired
-	private UserRepository userRepo;
 
 	@Autowired
 	private PatientRepository patientRepo;

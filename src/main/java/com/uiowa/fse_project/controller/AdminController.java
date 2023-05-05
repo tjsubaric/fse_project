@@ -1,5 +1,7 @@
 package com.uiowa.fse_project.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -18,14 +20,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uiowa.fse_project.model.Admin;
+import com.uiowa.fse_project.model.Appointments;
 //import com.uiowa.fse_project.model.Appointment;
 import com.uiowa.fse_project.model.Employee;
 import com.uiowa.fse_project.model.Patient;
 import com.uiowa.fse_project.model.UserDtls;
+import com.uiowa.fse_project.repository.AppointmentRepository;
 import com.uiowa.fse_project.repository.EmployeeRepository;
 import com.uiowa.fse_project.repository.PatientRepository;
 import com.uiowa.fse_project.service.AdminService;
 import com.uiowa.fse_project.service.UserService;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin")
@@ -43,6 +49,8 @@ public class AdminController {
 	@Autowired
 	private  EmployeeRepository employeeRepository;
 
+	@Autowired
+	private AppointmentRepository appointmentRepository;
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncode;
@@ -54,6 +62,8 @@ public class AdminController {
 
 	@GetMapping("/appointment_board")
 	public String showAppointmentBoard(Model model, @RequestParam(required = false) Long newAppointment) {
+		List<Appointments> appointments = appointmentRepository.findAll();
+		model.addAttribute("appointments", appointments);
 		return "admin/appointment_board";
 	}
 
@@ -105,6 +115,7 @@ public class AdminController {
 	public String showNewAppointmentForm(Model model) {
 	 	List<Employee> employees = employeeRepository.findAll();
      	List<Patient> patients = patientRepository.findAll();
+		model.addAttribute("employees", employees);
      	model.addAttribute("employees", employees);
     	model.addAttribute("patients", patients);
      	model.addAttribute("admin", new Admin());
@@ -133,7 +144,26 @@ public class AdminController {
     // public Appointment createAppointment(@RequestBody Appointment appointment) {
     //     return adminService.createAppointment(appointment);
     // }
-	
+	@PostMapping("/create_appointment")
+	public String createAppointment(@RequestParam("patient") long patient, @RequestParam("employee") long employee, @RequestParam("date") String Date, @RequestParam("time") String Time){
+		Optional<Employee> doctor = employeeRepository.findById(employee);
+		Optional<Patient> p = patientRepository.findById(patient);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		LocalDateTime appointmentDateTime = LocalDateTime.parse(Date+'T'+Time, formatter);
+		Appointments appointment = new Appointments();
+		appointment.setFirstName(p.get().getFirstName());
+		appointment.setLastName(p.get().getLastName());
+		appointment.setDoctor(doctor.get().getFirstName() + " " + doctor.get().getLastName());
+		appointment.setAppointmentdate(appointmentDateTime);
+		appointmentRepository.save(appointment);
+		p.ifPresent((patient2) -> {
+			patient2.setDoctor(appointment.getDoctor());
+			patient2.setdoctorId(employee);
+			patient2.setAppointmentdate(appointment.getAppointmentdate());
+			patientRepository.save(patient2);
+		});
+		return "redirect:appointment_board";
+	}
 
     @PostMapping("/saveAdmin")
 	public String saveAdmin(@ModelAttribute UserDtls user, HttpSession session) {

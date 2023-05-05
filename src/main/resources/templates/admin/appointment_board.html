@@ -16,17 +16,19 @@
 						<th>Employee Name</th>
 						<th>Patient Name</th>
 						<th>Appointment Date</th>
-                        <th>Appointment Time</th>
-                        <th>Bed Number</th>
+                        <th>Bed Name</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="patient : ${patients}">
-						<td th:text="${patient.firstName + ' ' + patient.lastName}"></td>
+					<tr th:each="appointment : ${appointments}">
+						<td th:text="${appointment.getDoctor()}"></td>
+						<td th:text="${appointment.getFirstName() + ' ' + appointment.getLastName()}"></td>
+						<td th:text="${appointment.getAppointmentdate()+ ' '}"></td>
+						<td th:text="${appointment.getLastName()}"></td>
 						<td>
-							<a th:href="@{/admin/patient_board/showFormPatientUpdate/{id}(id=${patient.id})}" class="btn btn-primary">Update</a>
-							<a th:href="@{/admin/patient_board/deletePatient/{id}(id=${patient.id})}" class="btn btn-danger">Delete</a>
+							<a class="btn btn-primary">Update</a>
+							<a class="btn btn-danger">Delete</a>
 						</td>
 					</tr>
 				</tbody>

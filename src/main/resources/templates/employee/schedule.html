@@ -14,16 +14,14 @@
 					<tr>
 						<th>First Name</th>
 						<th>Last Name</th>
-						<th>Email</th>
 						<th>Appointment</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="patient : ${patients}">
-						<td th:text="${patient.firstName}"></td>
-						<td th:text="${patient.lastName}"></td>
-						<td th:text="${patient.email}"></td>
-                        <td th:text="${patient.appointmentdate + ' '}"></td>
+					<tr th:each="appointment : ${appointments2}">
+						<td th:text="${appointment.firstName}"></td>
+						<td th:text="${appointment.lastName}"></td>
+                        <td th:text="${appointment.appointmentdate + ' '}"></td>
 					</tr>
 				</tbody>
 			</table>

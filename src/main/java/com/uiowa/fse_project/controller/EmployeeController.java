@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.uiowa.fse_project.service.EmployeeService;
 import org.springframework.data.domain.Page;
 import java.util.List;
+import java.util.Optional;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -76,15 +77,20 @@ public class EmployeeController {
 	@RequestParam(defaultValue = "asc") String sortDir, @PathVariable(value = "id") long id) {
 		int pageSize = 5;
 		long docID = id;
-		Page<Patient> page = employeeService.findMyPatientsPaginated(pageNo, pageSize, sortField, sortDir);
-		List<Patient> patients = page.getContent();
-		ArrayList<Patient> myPatients = new ArrayList<Patient>();
-		for(int i=0; i<patients.size(); i++){
-			if (patients.get(i).getdoctorId() == (docID)){
-				myPatients.add(patients.get(i));
+		Optional<Employee> employee = employeeRepo.findById(id);
+		Page<Appointments> page = employeeService.findMyAppointmentsPaginated(pageNo, pageSize, sortField, sortDir);
+		List<Appointments> appointments = page.getContent();
+		ArrayList<Appointments> myAppointments = new ArrayList<Appointments>();
+		for(int i=0; i<appointments.size(); i++){
+			if (appointments.get(i).getDoctor() == (employee.get().getFirstName()+' '+employee.get().getLastName())){
+				myAppointments.add(appointments.get(i));
 			}
 		}
-	
+
+		String doctorFullName = employee.get().getFirstName() + " " + employee.get().getLastName();	
+		List<Appointments> appointments2 = appointmentRepository.findByDoctorName(doctorFullName);
+		model.addAttribute("appointments", appointments);
+
 		model.addAttribute("currentPage", pageNo);
 		model.addAttribute("totalPages", page.getTotalPages());
 		model.addAttribute("totalItems", page.getTotalElements());
@@ -93,7 +99,8 @@ public class EmployeeController {
 		model.addAttribute("sortDir", sortDir);
 		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
 
-		model.addAttribute("patients", myPatients);
+		model.addAttribute("appointments", myAppointments);
+		model.addAttribute("appointments2", appointments2);
 
 		return "employee/schedule";
 	}
@@ -149,13 +156,4 @@ public class EmployeeController {
 		employeeService.issueBill(patient);
 		return "redirect:/employee/";
 	}
-
-	/*@GetMapping("/schedule")
-	public String showAppointments(Model model, @ModelAttribute("employee") Employee employee) {
-		String doctorFullName = employee.getFirstName() + " " + employee.getLastName();	
-		List<Appointments> appointments = appointmentRepository.findByDoctorName(doctorFullName);
-		model.addAttribute("appointments", appointments);
-		return "employee/schedule";
-	}
-	*/
 }

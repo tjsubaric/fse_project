@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+
+import com.uiowa.fse_project.repository.AppointmentRepository;
 import com.uiowa.fse_project.repository.PatientRepository;
+import com.uiowa.fse_project.model.Appointments;
 import com.uiowa.fse_project.model.Patient;
 import org.springframework.data.domain.Sort;
 
@@ -15,6 +18,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Autowired
 	private PatientRepository patientRepository;
+
+	@Autowired
+	private AppointmentRepository appointmentRepository;
 
 	@Override
     public void giveDiagnosis(Patient patient){
@@ -81,5 +87,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
 		return this.patientRepository.findAll(pageable);
+	}
+	@Override
+    public Page<Appointments> findMyAppointmentsPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+			Sort.by(sortField).descending();
+
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+		return this.appointmentRepository.findAll(pageable);
 	}
 }

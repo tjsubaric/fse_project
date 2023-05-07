@@ -71,7 +71,32 @@ public class EmployeeController {
 
 		return "employee/mypatients";
 	}
+	@GetMapping("/schedule/{id}")
+	public String showAppointmentBoard(Model model, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "firstName") String sortField, 
+	@RequestParam(defaultValue = "asc") String sortDir, @PathVariable(value = "id") long id) {
+		int pageSize = 5;
+		long docID = id;
+		Page<Patient> page = employeeService.findMyPatientsPaginated(pageNo, pageSize, sortField, sortDir);
+		List<Patient> patients = page.getContent();
+		ArrayList<Patient> myPatients = new ArrayList<Patient>();
+		for(int i=0; i<patients.size(); i++){
+			if (patients.get(i).getdoctorId() == (docID)){
+				myPatients.add(patients.get(i));
+			}
+		}
+	
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
 
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+
+		model.addAttribute("patients", myPatients);
+
+		return "employee/schedule";
+	}
 	@GetMapping("/mypatients/prescription/{id}")
 	public String prescribePatient(@PathVariable(value = "id") long id, Model model) {
 		Patient patient = employeeService.getMyPatientById(id);
@@ -125,11 +150,12 @@ public class EmployeeController {
 		return "redirect:/employee/";
 	}
 
-	@GetMapping("/schedule")
+	/*@GetMapping("/schedule")
 	public String showAppointments(Model model, @ModelAttribute("employee") Employee employee) {
 		String doctorFullName = employee.getFirstName() + " " + employee.getLastName();	
 		List<Appointments> appointments = appointmentRepository.findByDoctorName(doctorFullName);
 		model.addAttribute("appointments", appointments);
 		return "employee/schedule";
 	}
+	*/
 }

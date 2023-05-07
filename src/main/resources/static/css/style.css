@@ -139,7 +139,7 @@ border-bottom: 1px solid #070707;
 
 .wrapper2{
 	position : absolute !important;
-	top: 30%   !important;
+	top: 37%   !important;
 	left: 12% !important;
 	transform: translate(-37%,-12%) !important;
 	width: 600px !important;
@@ -147,4 +147,9 @@ height: 250px;
 	display: flex !important;
 	box-shadow: 0 1px 20px 0 rgba(44, 42, 177, 0.08)!important;
 font-family: 'Josefin Sans', sans-serif ;
+}
+
+.underline{
+	display: inline-block;
+	border-bottom: 2px solid #070707;
 }

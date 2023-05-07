@@ -1,19 +1,55 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-    th:replace="employee_dash::layout(~{::section})">
+	th:replace="employee_dash::layout(~{::section})">
 <head>
-    <meta charset="UTF-8">
-    <title>Employee Home</title>
+<meta charset="ISO-8859-1">
+<title>Employee My Patients</title>
 </head>
 <body>
-    <section>
-        <h1>Employee Home Page</h1>
-		<select class="form-control" name = "appointmenttable">
-			<option value="">-- Select Doctor --</option>
-			<th:block th:each="appointment : ${appointments}">
-			  <option th:value="${appointment.id}" th:text="${appointment.appointmentdate + ' ' + appointment.doctor}"></option>
-			</th:block>
-		</select>
-    </section>
+	<section>
+		<div class="container my-2">
+			<h1>Schedule</h1>
+			<table border="1" class = "table table-striped table-responsive-md">
+				<thead>
+					<tr>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Email</th>
+						<th>Appointment</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="patient : ${patients}">
+						<td th:text="${patient.firstName}"></td>
+						<td th:text="${patient.lastName}"></td>
+						<td th:text="${patient.email}"></td>
+                        <td th:text="${patient.appointmentdate + ' '}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<div th:if = "${totalPages > 1}">
+				<div class = "row col-sm-10">
+					<div class = "col-sm-2">
+						Total Rows: [[${totalItems}]] 
+					</div>
+					<div class = "col-sm-1">
+						<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+							<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+							<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+						</span>
+					</div>
+					<div class = "col-sm-1">
+						<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+						<span th:unless="${currentPage < totalPages}">Next</span>
+					</div>
+					
+					 <div class="col-sm-1">
+						<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+						<span th:unless="${currentPage < totalPages}">Last</span>
+						</div>
+				</div>
+			</div>
+		</div>
+	</section>
 </body>
 </html>

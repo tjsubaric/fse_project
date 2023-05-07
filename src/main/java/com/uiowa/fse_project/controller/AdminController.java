@@ -140,6 +140,11 @@ public class AdminController {
 		return "admin/new_patient";
 	}
 
+	@GetMapping("/appointment_board/deleteAppointment/{id}")
+	public String deleteAppointment(@PathVariable (value = "id") long id) {
+		this.adminService.deleteAppointmentById(id);
+		return "redirect:/admin/appointment_board";
+	}
 	// @PostMapping("/appointment_board/create_appointment")
     // public Appointment createAppointment(@RequestBody Appointment appointment) {
     //     return adminService.createAppointment(appointment);

@@ -10,8 +10,8 @@
     <section>
         <div class = "home-inner">
             <div class="container my-2">
-                <h1>Current Outstanding Bill:</h1>
-                <h2 th:text="${patientuser.getBill()}"></h2>
+                <h1 class = "underline">Current Outstanding Bill:</h1>
+                <h2 th:text="'$' + ${patientuser.getBill()} + '0' "></h2>
                 <a th:href="@{/patient/makePayment/{id}(id=${patientuser.id})}" class="btn btn-success">Make Payment</a>
             </div>
         </div>

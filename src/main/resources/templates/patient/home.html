@@ -43,7 +43,7 @@
 						<h3> Billing Summary:</h3>
 						<div class = "info_data">
 							<div class = "data">
-								<h5 th:text = "${patientuser.getBill()} + ' '"></h5>
+								<h5 th:text = "'$' + ${patientuser.getBill()} + '0'"></h5>
 							</div>
 						</div>
 						<h3> Prescriptions:</h3>

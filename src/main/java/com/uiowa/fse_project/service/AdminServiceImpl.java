@@ -12,17 +12,18 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.uiowa.fse_project.model.Admin;
-//import com.uiowa.fse_project.model.Appointment;
 import com.uiowa.fse_project.model.Employee;
 import com.uiowa.fse_project.model.Patient;
 import com.uiowa.fse_project.repository.AdminRepository;
-//import com.uiowa.fse_project.repository.AppointmentRepository;
+import com.uiowa.fse_project.repository.AppointmentRepository;
 import com.uiowa.fse_project.repository.EmployeeRepository;
 import com.uiowa.fse_project.repository.PatientRepository;
+import com.uiowa.fse_project.model.Appointments;
 
 @Service
 public class AdminServiceImpl implements AdminService {
-
+	@Autowired
+	private AppointmentRepository appointmentRepository;
 	@Autowired
 	private AdminRepository adminRepository;
 
@@ -97,7 +98,11 @@ public class AdminServiceImpl implements AdminService {
     //     // save the appointment to the database
     //     return appointmentRepository.save(appointment);
     // }
-
+	
+	@Override
+	public void deleteAppointmentById(long id) {
+		this.appointmentRepository.deleteById(id);
+	}
 	@Override
 	public Admin getAdminById(long id) {
 		Optional<Admin> optional = adminRepository.findById(id);
@@ -121,7 +126,18 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return employee;
 	}
-
+	
+	@Override
+	public Appointments getAppointmentById(long id) {
+		Optional<Appointments> optional = appointmentRepository.findById(id);
+		Appointments appointment = null;
+		if (optional.isPresent()) {
+			appointment = optional.get();
+		} else {
+			throw new RuntimeException(" Employee not found for id :: " + id);
+		}
+		return appointment;
+	}
 	@Override
 	public Patient getPatientById(long id) {
 		Optional<Patient> optional = patientRepository.findById(id);
@@ -187,5 +203,6 @@ public class AdminServiceImpl implements AdminService {
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
 		return this.patientRepository.findAll(pageable);
 	}
+
 
 }

@@ -3,12 +3,11 @@
 	th:replace="employee_dash::layout(~{::section})">
 <head>
 <meta charset="ISO-8859-1">
-<title>Employe Home</title>
-
+<title>Employee Home</title>
 </head>
 <body>
-	<section>
-		<h1>Employee Home Page</h1>
+	<section style="text-align: center;">
+		<h1>Welcome back, <span th:text="${employee.firstName + ' ' + employee.lastName}"></span>!</h1>
 	</section>
 </body>
 </html>

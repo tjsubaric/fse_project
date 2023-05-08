@@ -3,7 +3,6 @@ package com.uiowa.fse_project.service;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import com.uiowa.fse_project.model.Admin;
-//import com.uiowa.fse_project.model.Appointment;
 import com.uiowa.fse_project.model.Employee;
 import com.uiowa.fse_project.model.Patient;
 import com.uiowa.fse_project.model.Appointments;
@@ -34,7 +33,6 @@ public interface AdminService {
     void deletePatientById(long id);
     Page<Patient> findPatientPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
     Patient getPatientByEmail(String email);
-    //Appointment createAppointment(Appointment appointment);
     Appointments getAppointmentById(long id);
     void deleteAppointmentById(long id);
 

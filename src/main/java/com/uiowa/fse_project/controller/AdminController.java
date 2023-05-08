@@ -15,13 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uiowa.fse_project.model.Admin;
 import com.uiowa.fse_project.model.Appointments;
-//import com.uiowa.fse_project.model.Appointment;
 import com.uiowa.fse_project.model.Employee;
 import com.uiowa.fse_project.model.Patient;
 import com.uiowa.fse_project.model.UserDtls;
@@ -145,10 +143,7 @@ public class AdminController {
 		this.adminService.deleteAppointmentById(id);
 		return "redirect:/admin/appointment_board";
 	}
-	// @PostMapping("/appointment_board/create_appointment")
-    // public Appointment createAppointment(@RequestBody Appointment appointment) {
-    //     return adminService.createAppointment(appointment);
-    // }
+	
 	@PostMapping("/create_appointment")
 	public String createAppointment(@RequestParam("patient") long patient, @RequestParam("employee") long employee, @RequestParam("date") String Date, @RequestParam("time") String Time){
 		Optional<Employee> doctor = employeeRepository.findById(employee);

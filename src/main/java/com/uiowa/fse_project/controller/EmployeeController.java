@@ -53,7 +53,7 @@ public class EmployeeController {
 		long docID = id;
 		Page<Patient> page = employeeService.findMyPatientsPaginated(pageNo, pageSize, sortField, sortDir);
 		List<Patient> patients = page.getContent();
-		ArrayList<Patient> myPatients = new ArrayList<Patient>();
+		ArrayList<Patient> myPatients = new ArrayList<>();
 		for(int i=0; i<patients.size(); i++){
 			if (patients.get(i).getdoctorId() == (docID)){
 				myPatients.add(patients.get(i));
@@ -76,11 +76,10 @@ public class EmployeeController {
 	public String showAppointmentBoard(Model model, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "firstName") String sortField, 
 	@RequestParam(defaultValue = "asc") String sortDir, @PathVariable(value = "id") long id) {
 		int pageSize = 5;
-		long docID = id;
 		Optional<Employee> employee = employeeRepo.findById(id);
 		Page<Appointments> page = employeeService.findMyAppointmentsPaginated(pageNo, pageSize, sortField, sortDir);
 		List<Appointments> appointments = page.getContent();
-		ArrayList<Appointments> myAppointments = new ArrayList<Appointments>();
+		ArrayList<Appointments> myAppointments = new ArrayList<>();
 		for(int i=0; i<appointments.size(); i++){
 			if (appointments.get(i).getDoctor() == (employee.get().getFirstName()+' '+employee.get().getLastName())){
 				myAppointments.add(appointments.get(i));

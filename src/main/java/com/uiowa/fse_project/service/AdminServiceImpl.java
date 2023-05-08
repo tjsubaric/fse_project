@@ -1,6 +1,4 @@
 package com.uiowa.fse_project.service;
-
-//import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,27 +75,6 @@ public class AdminServiceImpl implements AdminService {
 	public void savePatient(Patient patient) {
 		this.patientRepository.save(patient);
 	}
-
-	// public Appointment createAppointment(Appointment appointment) {
-    //     // perform some business logic
-    //     return appointmentRepository.save(appointment);
-    // }
-
-    // public Appointment saveAppointment(Long employeeId, Long patientId, LocalDateTime appointmentDate, String appointmentTime) {
-        
-    //     Employee employee = employeeRepository.findById(employeeId).get();
-    //     Patient patient = patientRepository.findById(patientId).get();
-        
-    //     // create a new appointment object and set the necessary properties
-    //     Appointment appointment = new Appointment();
-    //     appointment.setEmployee(employee);
-    //     appointment.setPatient(patient);
-    //     appointment.setAppointmentDate(appointmentDate);
-    //     appointment.setAppointmentTime(appointmentTime);
-        
-    //     // save the appointment to the database
-    //     return appointmentRepository.save(appointment);
-    // }
 	
 	@Override
 	public void deleteAppointmentById(long id) {
@@ -150,18 +127,6 @@ public class AdminServiceImpl implements AdminService {
 		return patient;
 	}
 
-	// @Override
-	// public Appointments getAppointmentById(long id) {
-	// 	Optional<Appointments> optional = appointmentsRepository.findById(id);
-	// 	Appointments appointment = null;
-	// 	if (optional.isPresent()) {
-	// 		appointment = optional.get();
-	// 	} else {
-	// 		throw new RuntimeException("Appointment not found for id :: " + id);
-	// 	}
-	// 	return appointment;
-	// }
-
 	@Override
 	public void deleteAdminById(long id) {
 		this.adminRepository.deleteById(id);
@@ -203,6 +168,5 @@ public class AdminServiceImpl implements AdminService {
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
 		return this.patientRepository.findAll(pageable);
 	}
-
 
 }

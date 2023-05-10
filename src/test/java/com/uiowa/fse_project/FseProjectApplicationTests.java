@@ -207,6 +207,86 @@ class FseProjectApplicationTests {
     }
 
     @Test
+    public void testDiagnosePrescribePatient() throws Exception{
+        MockHttpSession session = new MockHttpSession();
+
+        //logging in as a doctor
+        session.setAttribute("employee", existingEmployee);
+
+        //Creating a test patient
+        UserDtls user = new UserDtls();
+        user.setFirstName("Test");
+        user.setLastName("Patient");
+        user.setEmail("testpatient@mail.com");
+        user.setPassword("pass");
+        adminController.savePatient(user, session);
+        Patient testPatient = patientRepository.findByEmail("testpatient@mail.com");
+
+        //Creating Patient that stores the id and diagnosis to be given to testPatient
+        Patient diagnosis = new Patient();
+        diagnosis.setId(testPatient.getId());
+        diagnosis.setDiagnosis("Arthritis");
+
+        //Creating Patient that stores the id and prescription to be given to testPatient
+        Patient prescription = new Patient();
+        prescription.setId(testPatient.getId());
+        prescription.setPrescription("Ibuprofen");
+
+        //Diagnosing and Prescribing the test Patient
+        String resultDiagnose = employeeController.diagnosePatient(diagnosis);
+        String resultPrescribe = employeeController.prescribePatient(prescription);
+
+        //verify that the diagnose and prescribe patient methods redirect to the employee home page
+        assertEquals("redirect:/employee/", resultDiagnose);
+        assertEquals("redirect:/employee/", resultPrescribe);
+
+        //verify the diagnosis and prescription were successfully given to the patient
+        assertEquals("Arthritis", testPatient.getDiagnosis());
+        assertEquals("Ibuprofen", testPatient.getPrescription());
+    }
+
+    @Test
+    public void billPatient() throws Exception{
+        MockHttpSession session = new MockHttpSession();
+
+        //logging in as a doctor
+        session.setAttribute("employee", existingEmployee);
+
+        //Creating a test patient
+        UserDtls user = new UserDtls();
+        user.setFirstName("Test");
+        user.setLastName("Patient");
+        user.setEmail("testpatient@mail.com");
+        user.setPassword("pass");
+        adminController.savePatient(user, session);
+        Patient testPatient = patientRepository.findByEmail("testpatient@mail.com");
+
+        //Creating Patients that store the id and bills to be given to testPatient
+        Patient bill1 = new Patient();
+        bill1.setId(testPatient.getId());
+        bill1.setBill(69000);
+        Patient bill2 = new Patient();
+        bill2.setId(testPatient.getId());
+        bill2.setBill(420);
+
+        //Billing the test Patient
+        String resultBil1 = employeeController.billPatient(bill1);
+
+        //verify the patient got bill successfully once
+        assertEquals(69000, testPatient.getBill());
+
+        //Billing the test Patient again
+        String resultBill2 = employeeController.billPatient(bill2);
+
+        //verify the bill was added to the previous amount
+        assertEquals(69420, testPatient.getBill());
+
+        //verify that the billing method sends the user back to the employee home page
+        assertEquals("redirect:/employee/", resultBil1);
+        assertEquals("redirect:/employee/", resultBill2);
+    }
+
+    @Test
     public void testDeleteAdmin() throws Exception {
         // create a mock HttpSession
         MockHttpSession session = new MockHttpSession();
